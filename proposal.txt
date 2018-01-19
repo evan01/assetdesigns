@@ -1,0 +1,16 @@
+
+Project Definition.
+Our team is called Team Asset Designs.
+Tessa, a McGill graduate, wants to launch a Shopify eCommerce store, through which she can sell sustainable t-shirts. She’s based out of Montreal, and is in dire need of some software engineering help to build the right store. She’s looking for specific features to be added to her current site, like a map of where her sustainable products are sourced from, perhaps a new website theme, and a press and media page. These additions are done in the form of a straightforward Javascript front-end, ruby on rails back-end application, that you integrate with your shopify store.
+
+Team Members are: 
+Evan Knox - 260502120 - evan.knox@mail.mcgill.ca - @evan01
+Stuart Mashaal - 260639962 - stumash1@gmail.com - @stumash
+Justin Bell - 260561261 - justin.bell@mail.mcgill.ca - @belljust
+Rick Restagno - 260631415 - riccardo.restagno@mail.mcgill.ca - @Rick
+Christophe Vauclair - 260742188 - christophe.vauclair@mail.mcgill.ca - @cvauclair
+Katy Dong - 260610798 - katherine.dong@mail.mcgill.ca - @katherinedong
+Luan Tran - 260634302 - the-luan.tran@mail.mcgill.ca - @the-luantran
+Jason Dias - 260617554 - jason.dias@mail.mcgill.ca - @jasondias9
+Allison Mejia - 260742943 - allison.mejiadiestra@mail.mcgill.ca - @alliMD
+Kartik Karkala - 260564143 - kartik.karkala@mail.mcgill.ca - @kartikpuranik9
