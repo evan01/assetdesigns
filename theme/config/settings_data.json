@@ -88,9 +88,9 @@
           "1512681333541": {
             "type": "slide",
             "settings": {
-              "image": "",
-              "color_image_overlay": "#000000",
-              "image_overlay_opacity": 0,
+              "image": "shopify:\/\/shop_images\/vsco-cam-2.jpg",
+              "color_image_overlay": "#151010",
+              "image_overlay_opacity": 56,
               "slide_subheading": "Suffering from indecisiveness?",
               "slide_heading": "",
               "slide_cta": "Shop Best Sellers",
@@ -100,9 +100,9 @@
           "1512522366665": {
             "type": "slide",
             "settings": {
-              "image": "",
+              "image": "shopify:\/\/shop_images\/Spotlight-on-Student-Startups_image-via-Tessa-Battistin.jpg",
               "color_image_overlay": "#3d4246",
-              "image_overlay_opacity": 25,
+              "image_overlay_opacity": 41,
               "slide_subheading": "Our fashion choices should match our values",
               "slide_heading": "",
               "slide_cta": "Shop ethical looks",
@@ -137,19 +137,19 @@
           "featured-collections-2": {
             "type": "collection",
             "settings": {
-              "collection": ""
+              "collection": "test-collection"
             }
           },
           "featured-collections-0": {
             "type": "collection",
             "settings": {
-              "collection": ""
+              "collection": "test-collection"
             }
           },
           "1512699407937": {
             "type": "collection",
             "settings": {
-              "collection": ""
+              "collection": "test-collection"
             }
           }
         },
@@ -195,7 +195,7 @@
       "1512522874981": {
         "type": "featured-row",
         "settings": {
-          "image": "",
+          "image": "shopify:\/\/shop_images\/img_0663.jpg",
           "layout": "left",
           "title": "Sustainability Goals",
           "text": "<p><\/p>\n<p>Asset Designs uses silkscreen printing to offer a unique alternative to mass-produced garments. Each design is made to order and is printed by hand on to ethically sourced fabrics. Asset Designs champions &lsquo;slow fashion&rsquo;, which encourages consumers to buy staple wardrobe items for quality and longevity.&nbsp;<\/p>\n<p>Asset Designs is invested in promoting fair wages and high quality working conditions for factory workers through promoting Slow Fashion. We don't endorse products purely for the sake of an 'eco-friendly'&nbsp;label. We take the time to verify the certifications of factories and assess the overall carbon footprint of each product. Often, purchasing a locally sewn cotton tee shirt has a lower carbon footprint than an imported product from a foreign source. Asset Designs weighs these costs and thoughtfully chooses suppliers in order to offer the most locally made product of the highest quality.&nbsp;<\/p>",
@@ -216,7 +216,7 @@
         "type": "featured-blog",
         "settings": {
           "title": "",
-          "blog": "news",
+          "blog": "printing-process",
           "post_limit": 2,
           "blog_show_date": true,
           "blog_show_author": true,
