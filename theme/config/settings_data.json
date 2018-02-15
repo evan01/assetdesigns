@@ -297,10 +297,8 @@
           "image": "shopify:\/\/shop_images\/ezgif-4-f36932c9ec.jpg",
           "layout": "right",
           "layout-text": "right",
-          "title": "Section 1",
-          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>",
-          "button_label": "",
-          "button_link": ""
+          "title": "SECTION 1",
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>"
         }
       },
       "our-story-section-2": {
@@ -310,9 +308,7 @@
           "layout": "left",
           "layout-text": "left",
           "title": "Section 2",
-          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>",
-          "button_label": "",
-          "button_link": ""
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>"
         }
       },
       "our-story-section-3": {
@@ -322,9 +318,31 @@
           "layout": "right",
           "layout-text": "right",
           "title": "Section 3",
-          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>",
-          "button_label": "",
-          "button_link": ""
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis feugiat hendrerit mauris nec euismod. In varius feugiat velit commodo vestibulum. Etiam ultrices condimentum velit, scelerisque aliquam ante gravida a. Etiam sagittis enim venenatis tempus suscipit. Nullam ultrices congue turpis sed pulvinar. Proin ac odio ut quam dapibus mollis. Nullam bibendum convallis tellus non ullamcorper. Nullam finibus sit amet lacus in iaculis. Quisque eget velit a quam lacinia pharetra volutpat et eros. Aliquam et porta est.<\/p>"
+        }
+      },
+      "press-section-grid": {
+        "type": "press-section-grid",
+        "settings": {}
+      },
+      "our-story-section-4": {
+        "type": "our-story-section-4",
+        "settings": {
+          "image": "",
+          "layout": "left",
+          "layout-text": "left",
+          "title": "",
+          "text": ""
+        }
+      },
+      "our-story-section-5": {
+        "type": "our-story-section-5",
+        "settings": {
+          "image": "",
+          "layout": "left",
+          "layout-text": "left",
+          "title": "",
+          "text": ""
         }
       }
     },
