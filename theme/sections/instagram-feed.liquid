@@ -1,0 +1,27 @@
+{% if section.settings.title != blank %}
+      <div class="section-header text-center">
+        <h2 class="h1 section-header__title">{{ section.settings.title | escape }}</h2>
+        <hr class="hr--small">
+      </div>
+    {% endif %}
+<div style=" margin-bottom:5%" id="insta-feed"></div>
+
+{% schema %}
+  {
+    "name": "Instagram Feed",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Follow us on Instagram - @asset_designs"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
