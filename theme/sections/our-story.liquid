@@ -1,0 +1,130 @@
+<div class="featured-blog featured-blog--{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="wrapper">
+
+    {%- assign blog = blogs[section.settings.blog] -%}
+
+    {%- assign width = 'small--one-whole medium--one-whole large--one-whole' -%}
+
+
+    {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2 class="h1 section-header__title">{{ section.settings.title | escape }}</h2>
+      <hr class="hr--small">
+    </div>
+    {% endif %}
+    {% assign count = 0%}
+
+    {% for article in blog.articles%}
+    {% assign modulo = count | modulo:2%}
+    <div class="grid-uniform" style="margin-bottom:10%">
+      <div class="grid__item large--one-whole">
+        {%if modulo == 0%}
+        <div class="grid__item large--two-thirds">               
+          <h3>{{article.title}}</h3>
+          <p>{{article.content}}</p>
+        </div>
+        <div class="grid__item large--one-third">
+          {% unless article.image == blank %}
+          {% assign img_url = article.image%}
+          <noscript>
+            {{ article.image | img_url: '1024x1024' | img_tag: article.title | escape }}
+          </noscript>
+          <div class="article__featured-image-wrapper margin" style="margin: auto;">
+            {% assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img class="article__featured-image lazyload"
+                 src="{{ article.image | img_url: '300x300' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[310, 360, 480, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ article.image.aspect_ratio }}"
+                 data-sizes="auto">
+          </div>
+          {% endunless %}
+        </div>
+        {%else%}
+        <div class="grid__item large--one-third">
+          {% unless article.image == blank %}
+          {% assign img_url = article.image%}
+          <noscript>
+            {{ article.image | img_url: '1024x1024' | img_tag: article.title | escape }}
+          </noscript>
+          <div class="article__featured-image-wrapper margin" style="margin: auto;">
+            {% assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img class="article__featured-image lazyload"
+                 src="{{ article.image | img_url: '300x300' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[310, 360, 480, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ article.image.aspect_ratio }}"
+                 data-sizes="auto">
+          </div>
+        </div>
+
+        {% endunless %}
+        <div class="grid__item large--two-thirds">               
+          <h3>{{article.title}}</h3>
+          <p>{{article.content}}</p>
+        </div>
+
+
+        {% endif%}
+      </div>
+    </div>
+    {% assign count = count | plus: 1 %}
+    {% endfor %}
+
+
+    {% if blog == empty %}
+    {% include 'onboarding-featured-blog' %}
+    {% endif %}
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Our Story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Printing Process"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "Printing Process"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "label": "Posts",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Printing Process",
+      "category": "Blog",
+      "settings": {
+        "blog": "Printing Process"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
