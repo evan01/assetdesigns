@@ -1,3 +1,5 @@
 .DS_Store
 theme/config.yml
 .idea/
+.DS_Store
+*.code-workspace
