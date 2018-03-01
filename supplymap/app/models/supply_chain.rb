@@ -1,0 +1,2 @@
+class SupplyChain < ApplicationRecord
+end
