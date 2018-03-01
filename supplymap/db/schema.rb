@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224220101) do
+ActiveRecord::Schema.define(version: 20180301194716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.text "description"
+    t.bigint "supply_chain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supply_chain_id"], name: "index_products_on_supply_chain_id"
+  end
 
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
@@ -23,4 +33,28 @@ ActiveRecord::Schema.define(version: 20180224220101) do
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.text "description"
+    t.bigint "supply_chain_id"
+    t.decimal "lattitude"
+    t.decimal "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_suppliers_on_name"
+    t.index ["supply_chain_id"], name: "index_suppliers_on_supply_chain_id"
+  end
+
+  create_table "supply_chains", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_supply_chains_on_name"
+  end
+
+  add_foreign_key "products", "supply_chains"
+  add_foreign_key "suppliers", "supply_chains"
 end
