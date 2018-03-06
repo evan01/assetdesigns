@@ -1,6 +1,6 @@
 # Setup of Rails App
     git fetch | git pull
-Will get the latest code from our repo
+Will get the latest code from our repols
 
     bundle install
 Installs external libraries onto your computer that the rails app, (runnning on your computer) will need.
@@ -36,11 +36,19 @@ I believe our app is already configured in github with the propper api key but I
     
 
 # Rails Commands
+Whenever you want to do or change **ANYTHING**  with the application, you can run a rails command to generate the changes that you want.
+    rails -Command
+
+#### Create an API function
+    rails generate controller CONTROLLER_NAME
+    https://www.tutorialspoint.com/ruby-on-rails/rails-controllers.htm
+
 #### Add  Column to Table https://stackoverflow.com/questions/12984316/rails-database-add-column
 
 #### Add a new Table
 `rails g migration Create<TableName> <col1>:type <col2>:type ...ect`
     
 # Active record commands
+    rails c //Puts you in the rails console where you can run the commands below
 list all tables - `ActiveRecord::Base.connection.tables`
 
