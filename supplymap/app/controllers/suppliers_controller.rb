@@ -12,15 +12,14 @@ class SuppliersController < ApplicationController
 
     # Show supplier
     def show
-        @supplier = Supplier.find params[:id]
+        @supplier = Supplier.find(params[:id])
     end
 
-    # New supplier
+    # New supplier and create
     def new
         @supplier = Supplier.new
     end
 
-    # Adding new suppliers
     def create
         @supplier = Supplier.new supplier_params
 
@@ -32,9 +31,32 @@ class SuppliersController < ApplicationController
         end
     end
 
+    # Edit and update supplier
+    def edit
+        @supplier = Supplier.find params[:id]
+    end
+
+    def update
+        @supplier = Supplier.find(params[:id])
+
+        if @supplier.update supplier_params
+            flash[:success] = "Updated Supplier"
+            redirect_to supplier_path(@supplier)
+        else
+            render :edit
+        end
+    end
+
+    # Delete supplier
+    def destroy
+        @supplier = Supplier.find params[:id]
+        @supplier.destroy
+        redirect_to suppliers_path
+    end
+
     private
 
     def supplier_params
-        params.require(:supplier).permit(:name, :type, :description, :lattitude, :longitude)
+        params.require(:supplier).permit(:name, :product_kind, :description, :lattitude, :longitude)
     end
 end
