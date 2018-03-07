@@ -5,3 +5,14 @@
     <p><%= @supplier.description %></p>
   </div>
 </div>
+
+<div class="btn-group">
+  <%= link_to edit_supplier_path(@supplier), class: "btn btn-primary btn-sm" do %>
+    <i class="glyphicon glyphicon-edit"></i>
+    <span>Edit Supplier</span>
+  <% end %>
+  <%= link_to supplier_path(@supplier), class: "btn btn-danger btn-sm", method: :delete do %>
+    <i class="glyphicon glyphicon-trash"></i>
+    <span>Delete Supplier</span>
+  <% end %>
+</div>

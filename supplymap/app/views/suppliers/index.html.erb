@@ -10,10 +10,12 @@
       <th>Longitude</th>
     </tr>
 
+    <%# Add each supplier to the table %>
     <% @suppliers.each do |supplier| %>
       <tr>
         <td><%= supplier.id %></td>
-        <td><%= supplier.name %></td>
+        <%# Make the name of the supplier clickable %>
+        <td> <%= link_to supplier_path(id: supplier.id) do %> <%= supplier.name %> <% end %> </td>
         <td><%= supplier.description %></td>
         <td><%= supplier.lattitude %></td>
         <td><%= supplier.longitude %></td>
