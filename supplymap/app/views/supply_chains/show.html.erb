@@ -1,0 +1,33 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th><%= @supplychain.id %></th>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th><%= @supplychain.name %></th>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <th><%= @supplychain.description %></th>
+  </tr>
+</table>
+
+<p>
+<div class="btn-group">
+  <%= link_to edit_supply_chain_path(@supplychain), class: "btn btn-primary btn-sm" do %>
+    <i class="glyphicon glyphicon-edit"></i>
+    <span>Edit Supply Chain</span>
+  <% end %>
+  <%= link_to supply_chain_path(@supplychain), class: "btn btn-danger btn-sm", method: :delete do %>
+    <i class="glyphicon glyphicon-trash"></i>
+    <span>Delete Supply Chain</span>
+  <% end %>
+</div>
+</p>

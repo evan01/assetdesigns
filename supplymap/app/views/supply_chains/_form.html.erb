@@ -1,0 +1,18 @@
+<%= form_for @supplychain do |s| %>
+  <table>
+    <tr>
+      <th><%= s.label :name %></th>
+      <th><%= s.text_field :name %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :description %></th>
+      <th><%= s.text_field :description %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :count %></th>
+      <th><%= s.text_field :count %></th>
+    </tr>
+  </table>
+
+  <p><button class="btn btn-success" type="submit">Save</button> </p>
+<% end %> 
