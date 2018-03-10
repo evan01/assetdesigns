@@ -1,11 +1,37 @@
-<div class="media">
-  <div class="media-body">
-    <h4><%= @supplier.name %> | &nbsp; <small><%= @supplier.id %></small></h4>
-    <h5>Type: <%= @supplier.product_kind || "unknown" %></h5>
-    <p><%= @supplier.description %></p>
-  </div>
-</div>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
 
+<table>
+  <tr>
+    <th>Id</th>
+    <th><%= @supplier.id %></th>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th><%= @supplier.name %></th>
+  </tr>
+  <tr>
+    <th>Product Kind</th>
+    <th><%= @supplier.product_kind %></th>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <th><%= @supplier.description %></th>
+  </tr>
+  <tr>
+    <th>Lattitude</th>
+    <th><%= @supplier.lattitude %></th>
+  </tr>
+  <tr>
+    <th>Longitude</th>
+    <th><%= @supplier.longitude %></th>
+  </tr>
+</table>
+
+<p>
 <div class="btn-group">
   <%= link_to edit_supplier_path(@supplier), class: "btn btn-primary btn-sm" do %>
     <i class="glyphicon glyphicon-edit"></i>
@@ -16,3 +42,4 @@
     <span>Delete Supplier</span>
   <% end %>
 </div>
+</p>
