@@ -130,13 +130,19 @@ list all tables - `ActiveRecord::Base.connection.tables`
 
 # Admin side API
 Since the admin really only needs to modify suppliers and supply_chains, there are two url trees that can be accessed.
-The first is applicationpath/suppliers/ which lists all current suppliers in the databse. The adin is able to create and modify each existing supplier.
+The first is applicationpath/suppliers/ which lists all current suppliers in the databse. The admin is able to create and modify each existing supplier.
 The specific paths to do so are applicationpath/suppliers/new and applicationpath/suppliers/supplier_id/edit
 The path applicationpath/suppliers/supplier_id/show can also be used to view one supplier at a time.
 
 Example path: localhost:3000/suppliers/4/edit, this will bring up a page to modify the supplier with id 4.
 
 The same architecture (i.e.: the show and edit pages) is set up for the supply chains with the path applicationpath/supply_chains/*
+
+The admin can also modify the supplier_connections (which connects two suppliers together).
+The paths used in the supplier connection are the same as in suppliers, and supply_chains.
+`applicationpath/supplier_connections/` lists all of the connections in the database
+`applicationpath/supplier_connections/supplier_connection_id` enables the admin to view one supplier connection at a time. Clicking on the supplier ids of supplier A and supplier B will redirect the admin to the supplier page.
+`applicationpath/supplier_connections/new` and `applicationpath/supplier_connections/edit` were also added to create and edit the connections. 
 
 # Client side API
 The rails program also supports a different set of urls to be used by the client side map application (or whatever you want to call it).
