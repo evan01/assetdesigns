@@ -1,2 +1,3 @@
-class SupplyChain < ApplicationRecord
+class SupplyChain < ActiveRecord::Base
+	
 end

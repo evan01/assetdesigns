@@ -1,2 +1,3 @@
-class Supplier < ApplicationRecord
+class Supplier < ActiveRecord::Base
+
 end

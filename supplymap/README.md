@@ -128,7 +128,26 @@ To do database modifications, you (as per usual), need to run some rails command
 # Active record commands
 list all tables - `ActiveRecord::Base.connection.tables`
 
+# Admin side API
+Since the admin really only needs to modify suppliers and supply_chains, there are two url trees that can be accessed.
+The first is applicationpath/suppliers/ which lists all current suppliers in the databse. The adin is able to create and modify each existing supplier.
+The specific paths to do so are applicationpath/suppliers/new and applicationpath/suppliers/supplier_id/edit
+The path applicationpath/suppliers/supplier_id/show can also be used to view one supplier at a time.
 
+Example path: localhost:3000/suppliers/4/edit, this will bring up a page to modify the supplier with id 4.
+
+The same architecture (i.e.: the show and edit pages) is set up for the supply chains with the path applicationpath/supply_chains/*
+
+# Client side API
+The rails program also supports a different set of urls to be used by the client side map application (or whatever you want to call it).
+The urls are used to get JSON formatted data about the shops, products, suppliers and supply_chains and are respectively located at the creatively named:
+* applicationpath/all_shops
+* applicationpath/all_products
+* applicationpath/all_suppliers
+* applicationpath/all_supply_chains
+
+For example:
+request the page at localhost:3000/all_suppliers will return the JSON formatted data of all suppliers in the database.
 
 # Readme Todo
 * How to run the test suite

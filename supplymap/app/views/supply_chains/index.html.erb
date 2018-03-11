@@ -1,0 +1,42 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<h1>Supply Chains</h1>
+
+<p>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <%# Add each supplier to the table %>
+    <% @supplychains.each do |supplychain| %>
+      <tr>
+        <td><%= supplychain.id %></td>
+        <%# Make the name of the supplier clickable %>
+        <td> <%= link_to supply_chain_path(id: supplychain.id) do %> <%= supplychain.name %> <% end %> </td>
+        <td><%= supplychain.description %></td>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<p>
+  <%= link_to new_supply_chain_path, class: "btn btn-success btn-sm" do %>
+    <i class="glyphicon glyphicon-plus"></i>
+    <span>Add Supply Chain</span>
+  <% end %>
+</p>
+
+<% if @next_page %>
+  <nav>
+    <ul class="pager">
+      <li><%= link_to "More", supply_chains_path(page: @next_page) %></li>
+    </ul>
+  </nav>
+<% end %>

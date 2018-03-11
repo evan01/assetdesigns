@@ -1,0 +1,46 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<h1>Suppliers</h1>
+
+<p>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Lattitude</th>
+      <th>Longitude</th>
+    </tr>
+
+    <%# Add each supplier to the table %>
+    <% @suppliers.each do |supplier| %>
+      <tr>
+        <td><%= supplier.id %></td>
+        <%# Make the name of the supplier clickable %>
+        <td> <%= link_to supplier_path(id: supplier.id) do %> <%= supplier.name %> <% end %> </td>
+        <td><%= supplier.description %></td>
+        <td><%= supplier.lattitude %></td>
+        <td><%= supplier.longitude %></td>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<p>
+  <%= link_to new_supplier_path, class: "btn btn-success btn-sm" do %>
+    <i class="glyphicon glyphicon-plus"></i>
+    <span>Add Supplier</span>
+  <% end %>
+</p>
+
+<% if @next_page %>
+  <nav>
+    <ul class="pager">
+      <li><%= link_to "More", suppliers_path(page: @next_page) %></li>
+    </ul>
+  </nav>
+<% end %>

@@ -1,0 +1,30 @@
+<%= form_for @supplier do |s| %>
+  <table>
+    <tr>
+      <th><%= s.label :name %></th>
+      <th><%= s.text_field :name %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :product_kind %></th>
+      <th><%= s.text_field :product_kind %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :description %></th>
+      <th><%= s.text_field :description %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :supply_chain_id %></th>
+      <th><%= s.text_field :supply_chain_id %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :lattitude %></th>
+      <th><%= s.text_field :lattitude %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :longitude %></th>
+      <th><%= s.text_field :longitude %></th>
+    </tr>
+  </table>
+
+  <p><button class="btn btn-success" type="submit">Save</button> </p>
+<% end %> 
