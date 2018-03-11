@@ -1,0 +1,22 @@
+<%= form_for @supplierconnection do |s| %>
+  <table>
+    <tr>
+      <th><%= s.label :supplier_a_id %></th>
+      <th><%= s.text_field :supplier_a_id %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :supplier_b_id %></th>
+      <th><%= s.text_field :supplier_b_id %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :co2_emission %></th>
+      <th><%= s.text_field :co2_emission %></th>
+    </tr>
+    <tr>
+      <th><%= s.label :distance %></th>
+      <th><%= s.text_field :distance %></th>
+    </tr>
+  </table>
+
+  <p><button class="btn btn-success" type="submit">Save</button> </p>
+<% end %> 

@@ -1,0 +1,41 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th><%= @supplierconnection.id %></th>
+  </tr>
+  <tr>
+    <th>Supplier A ID</th>
+    <th><%= link_to supplier_path(id: @supplierconnection.supplier_a_id) do %> <%= @supplierconnection.supplier_a_id %> <% end %></th>
+  </tr>
+  <tr>
+    <th>Supplier B ID</th>
+    <th><%= link_to supplier_path(id: @supplierconnection.supplier_b_id) do %> <%= @supplierconnection.supplier_b_id %> <% end %></th>
+  </tr>
+  <tr>
+    <th>CO2 Emissions</th>
+    <th><%= @supplierconnection.co2_emission %></th>
+  </tr>
+  <tr>
+    <th>Distance</th>
+    <th><%= @supplierconnection.distance %></th>
+  </tr>
+</table>
+
+<p>
+<div class="btn-group">
+  <%= link_to edit_supplier_connection_path(@supplierconnection), class: "btn btn-primary btn-sm" do %>
+    <i class="glyphicon glyphicon-edit"></i>
+    <span>Edit Supplier Connection</span>
+  <% end %>
+  <%= link_to supplier_connection_path(@supplierconnection), class: "btn btn-danger btn-sm", method: :delete do %>
+    <i class="glyphicon glyphicon-trash"></i>
+    <span>Delete Supplier Connection</span>
+  <% end %>
+</div>
+</p>

@@ -1,0 +1,46 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<h1>Supplier Connections</h1>
+
+<p>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Supplier A ID</th>
+      <th>Supplier B ID</th>
+      <th>CO2 Emission</th>
+      <th>Distance</th>
+    </tr>
+
+    <%# Add each supplier connection to the table %>
+    <% @supplierconnections.each do |supplierconnection| %>
+      <tr>
+        <%# Make the id of the supplier connection clickable %>
+        <td><%= link_to supplier_connection_path(id: supplierconnection.id) do %> <%= supplierconnection.id %> <% end %> </td>
+        <td><%= supplierconnection.supplier_a_id %></td>
+        <td><%= supplierconnection.supplier_b_id %></td>
+        <td><%= supplierconnection.co2_emission %></td>
+        <td><%= supplierconnection.distance %></td>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<p>
+  <%= link_to new_supplier_connection_path, class: "btn btn-success btn-sm" do %>
+    <i class="glyphicon glyphicon-plus"></i>
+    <span>Add Supplier Connection</span>
+  <% end %>
+</p>
+
+<% if @next_page %>
+  <nav>
+    <ul class="pager">
+      <li><%= link_to "More", supplier_connections_path(page: @next_page) %></li>
+    </ul>
+  </nav>
+<% end %>

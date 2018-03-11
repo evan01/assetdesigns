@@ -20,4 +20,7 @@ Rails.application.routes.draw do
   # views/suppliers/ for html pages to show, modify and create new suppliers)
   get 'suppliers/' => 'suppliers#index'
   resources :suppliers
+
+  get 'supplier_connections/' => 'supplier_connections#index'
+  resources :supplier_connections
 end
