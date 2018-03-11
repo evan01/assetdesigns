@@ -1,0 +1,170 @@
+<style>
+  .resize{
+	width:250px;
+    height: auto;  
+  }
+</style>
+
+<div id="map" style="width: 100%; height: 500px;"></div> 
+<p id="status"></p>
+
+<script type="text/javascript"> 
+  function initMap() {
+
+    //Map styling
+    var styledMapType = new google.maps.StyledMapType(
+      [
+        {
+          featureType: "administrative",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },
+        {
+          featureType: "road",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [
+            {visibility: "off"}
+          ]
+        }
+      ],
+      {name: 'Supply Map'}
+    );
+
+
+
+    //initialize the map
+    var map = new google.maps.Map(document.getElementById('map'), {
+      mapTypeControl: false, //disables switching of map topography
+      center: new google.maps.LatLng(0, 0), //default centering, is changed later
+      zoom: 8,
+      mapTypeId: 'mystyle'
+    });
+
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+
+    //html content of the info window as a string
+    var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">McGill University</h1>'+
+        '<div id="bodyContent">'+
+        '<p><b>McGill University</b>,  is a coeducational public research university in Montreal, Quebec, Canada. '+
+        'It was established in 1821 by royal charter, granted by King George IV. The University bears the name of James McGill, '+
+        'a Montreal merchant originally from Scotland whose bequest in 1813 formed the university precursor, McGill College.</p>'+
+        '<p>Attribution: McGill University, <a href="https://en.wikipedia.org/wiki/McGill_University">'+
+        'https://en.wikipedia.org/wiki/McGill_University</a> '+
+        '</p>'+
+        '</div>'+
+        '<div>'+
+        '<img class="resize" src="{{ 'campus.jpg' | file_url }}">'+
+        '</div>'+
+          '</div>';
+
+    //initialize the info window
+    //TODO: add products picture, style it
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 300
+    });
+
+    //Geocode gets the coordinates of the given address
+    var geocoder = new google.maps.Geocoder();
+
+    //center the map onto Montreal
+    geocoder.geocode({'address': "Montreal"}, function(results, status) {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+
+    //add a marker at McGill University
+    geocoder.geocode({'address': "McGill University"}, function(results, status) {
+      if (status === 'OK') {
+        //once the address is obtained, create a marker on the specified map
+        var marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map
+        });
+        //add a listener to that particular marker
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+
+        });
+
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+  //Proof of concept of a GET request to our API
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if(this.status == 200 || this.status == 304){
+        var obj = JSON.parse(this.responseText);
+        document.getElementById("status").innerHTML = this.responseText;
+        alert("GET REQUEST SUCCESS MESSAGE: "+obj.message);
+      }
+    }
+  };
+  xhttp.open("GET", "https://1787ff02.ngrok.io/supply_chain", true);
+  xhttp.send();
+
+</script>
+
+
+
+<!-- make API KEY a variable editable -->
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgXduZYCxQxxBXDQ5S87uUWL4OIMaNA9I&callback=initMap">
+</script>
+
+{% schema %}
+  {
+    "name": "Map",
+    "class": "index-section index-map-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "id": "heading",
+        "type": "text",
+        "label": "Heading",
+        "default": "Our store"
+      },
+      {
+        "id": "api_key",
+        "type": "text",
+        "label": "Google Maps API key",
+        "info": "You’ll need to [register a Google Maps API Key](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key) to display the map"
+      }      
+    ],
+    "presets": [
+      {
+        "name": "Map",
+        "category": "Store information"
+      }
+    ]
+  }
+{% endschema %}
