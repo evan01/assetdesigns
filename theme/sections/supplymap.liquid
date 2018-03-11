@@ -16,6 +16,7 @@
     //Map styling
     var styledMapType = new google.maps.StyledMapType(
       [
+        {elementType: 'geometry', stylers: [{color: '#E5E5E5'}]},
         {
           featureType: "administrative",
           elementType: "labels",
@@ -28,6 +29,16 @@
           stylers: [
             { visibility: "off" }
           ]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{color: '#414245'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#bdbdbd'}]
         },
         {
           featureType: "road",
@@ -116,64 +127,68 @@
       }
     });
     
-    var json = '{"status":"SUCCESS","message":"Loaded all suppliers data","data":[{"id":1,"name":"Lanister","product_kind":"Shirts","description":"Always pay your debts","supply_chain_id":1,"lattitude":"-77.03","longitude":"38.895","created_at":"2018-03-09T18:08:36.385Z","updated_at":"2018-03-09T18:08:36.385Z","order":1},{"id":2,"name":"Stark","product_kind":"hoodies","description":"Winter is coming","supply_chain_id":2,"lattitude":"23.4","longitude":"-20.4","created_at":"2018-03-09T18:08:36.394Z","updated_at":"2018-03-09T18:08:36.394Z","order":1},{"id":3,"name":"Targarian","product_kind":"jackets","description":"Our queen is 10/10 better than your queen","supply_chain_id":3,"lattitude":"15.4","longitude":"5.9","created_at":"2018-03-09T18:08:36.398Z","updated_at":"2018-03-09T18:08:36.398Z","order":1},{"id":4,"name":"Tyrell","product_kind":"bags","description":"Margaery noooooooooo \u003c/3","supply_chain_id":2,"lattitude":"4.42","longitude":"10.3","created_at":"2018-03-09T18:08:36.402Z","updated_at":"2018-03-09T18:08:36.402Z","order":2},{"id":5,"name":"Baratheon","product_kind":"hunting equipment","description":"Invade! Oh... ok maybe not","supply_chain_id":1,"lattitude":"-78.3","longitude":"56.4223","created_at":"2018-03-09T18:08:36.406Z","updated_at":"2018-03-09T18:08:36.406Z","order":3},{"id":6,"name":"Greyjoy","product_kind":"Bathing Suits","description":"Just keep swimming","supply_chain_id":1,"lattitude":"-77.03","longitude":"38.895","created_at":"2018-03-09T18:08:36.410Z","updated_at":"2018-03-09T18:08:36.410Z","order":2},{"id":7,"name":"Lanister","product_kind":"Shirts","description":"Always pay your debts","supply_chain_id":1,"lattitude":"-77.03","longitude":"38.895","created_at":"2018-03-09T18:15:47.589Z","updated_at":"2018-03-09T18:15:47.589Z","order":1},{"id":8,"name":"Stark","product_kind":"hoodies","description":"Winter is coming","supply_chain_id":2,"lattitude":"23.4","longitude":"-20.4","created_at":"2018-03-09T18:15:47.594Z","updated_at":"2018-03-09T18:15:47.594Z","order":1},{"id":9,"name":"Targarian","product_kind":"jackets","description":"Our queen is 10/10 better than your queen","supply_chain_id":3,"lattitude":"15.4","longitude":"5.9","created_at":"2018-03-09T18:15:47.598Z","updated_at":"2018-03-09T18:15:47.598Z","order":1},{"id":10,"name":"Tyrell","product_kind":"bags","description":"Margaery noooooooooo \u003c/3","supply_chain_id":2,"lattitude":"4.42","longitude":"10.3","created_at":"2018-03-09T18:15:47.602Z","updated_at":"2018-03-09T18:15:47.602Z","order":2},{"id":11,"name":"Baratheon","product_kind":"hunting equipment","description":"Invade! Oh... ok maybe not","supply_chain_id":1,"lattitude":"-78.3","longitude":"56.4223","created_at":"2018-03-09T18:15:47.609Z","updated_at":"2018-03-09T18:15:47.609Z","order":3},{"id":12,"name":"Greyjoy","product_kind":"Bathing Suits","description":"Just keep swimming","supply_chain_id":1,"lattitude":"-77.03","longitude":"38.895","created_at":"2018-03-09T18:15:47.615Z","updated_at":"2018-03-09T18:15:47.615Z","order":2}]}';
-    var jsonData = JSON.parse(json);
-    var list = document.getElementById('demo');
+    var json;
 
-    var infowindow = new google.maps.InfoWindow();
+    //Proof of concept of a GET request to our API
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = 
+      
+      function() {
+      if (this.readyState == 4) {
+        if(this.status == 200 || this.status == 304){
+          json = this.responseText;
+          var jsonData = JSON.parse(json);
+          var list = document.getElementById('demo');
 
-    var marker, i;
-    
-    for(i = 0; i< 5; i++){
-      var entry = document.createElement('li');
-      locations = jsonData.data;
-      entry.appendChild(document.createTextNode(locations[i].name + ", Lat: " + locations[i].lattitude + ", Long:" +locations[i].longitude));
-      list.appendChild(entry);
-      
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude),
-        map: map
-      });
-      
-      
-      google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-        return function() {
-          var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">'+jsonData.data[i].name+'</h1>'+
-            '<div id="bodyContent">'+
-            '<p>'+jsonData.data[i].description+
-            '</p>'+
-            '</div>'+
-            '</div>';
-          infowindow.setContent(contentString);
-          infowindow.open(map, marker);
+          var infowindow = new google.maps.InfoWindow();
+
+          var marker, i;
+
+          for(i = 0; i< 5; i++){
+            var entry = document.createElement('li');
+            locations = jsonData.data;
+            entry.appendChild(document.createTextNode(locations[i].name + ", Lat: " + locations[i].lattitude + ", Long:" +locations[i].longitude));
+            list.appendChild(entry);
+
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude),
+              map: map
+            });
+
+
+            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+              return function() {
+                var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">'+jsonData.data[i].name+'</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p>'+jsonData.data[i].description+
+                    '</p>'+
+                    '</div>'+
+                    '</div>';
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+              }
+            })(marker, i));
+
+            google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
+              return function() {
+                infowindow.close(map, marker);
+              }
+            })(marker, i));
+          }
+        }else{
+        	alert("Error retrieving locations from server!")
         }
-      })(marker, i));
-            
-      google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
-        return function() {
-          infowindow.close(map, marker);
-        }
-      })(marker, i));
-    }
+      }
+    };
+    xhttp.open("GET", "https://1787ff02.ngrok.io/all_suppliers", true);
+    xhttp.send();
   }
   
 
-  //Proof of concept of a GET request to our API
-//   var xhttp = new XMLHttpRequest();
-//   xhttp.onreadystatechange = function() {
-//     if (this.readyState == 4) {
-//       if(this.status == 200 || this.status == 304){
-//         var obj = JSON.parse(this.responseText);
-//         document.getElementById("status").innerHTML = this.responseText;
-//         alert("GET REQUEST SUCCESS MESSAGE: "+obj.message);
-//       }
-//     }
-//   };
-//   xhttp.open("GET", "https://1787ff02.ngrok.io/supply_chain", true);
-//   xhttp.send();
+  
 
 </script>
 
