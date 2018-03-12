@@ -30,3 +30,16 @@ Suppliers_List = [
 Suppliers_List.each do |name, type, description, supply_chain_id, lattitude, longitude, order|
   Supplier.create( name:name, product_kind:type, description:description, supply_chain_id:supply_chain_id, lattitude:lattitude, longitude:longitude, order:order)
 end
+
+Supplier_Connection_List = [
+    [1, 2, 50, 11830],
+    [1, 3, 40, 3434],
+    [2, 3, 5, 10],
+    [3, 4, 100, 433020],
+    [4, 5, 40, 32123],
+    [5, 6, 32, 3243241]
+
+]
+Supplier_Connection_List.each do |supplier_a_id, supplier_b_id, co2_emission, distance|
+ SupplierConnection.create(supplier_a_id:supplier_a_id, supplier_b_id:supplier_b_id, co2_emission:co2_emission, distance:distance)
+end
