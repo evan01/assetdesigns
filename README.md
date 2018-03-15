@@ -1,3 +1,4 @@
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/evan01/assetdesigns.png?columns=all)](https://waffle.io/evan01/assetdesigns?utm_source=badge)
+<img src="https://badge.waffle.io/evan01/assetdesigns.png?columns=all&style=flat-square" height="40">
+
 # assetdesigns
-The source code for the assetdesigns web apps on https://assetdesignsapparel.com/
+Source code for the assetdesigns web apps on https://assetdesignsapparel.com/
