@@ -91,6 +91,9 @@
       ],
       {name: 'Supply Map'}
       );
+
+    /////////////////////////////MAP CREATION AND CENTERING //////////////////////////////////////
+
     //initialize the map
     var map = new google.maps.Map(document.getElementById('map'), {
       mapTypeControl: true, //disables switching of map topography
@@ -147,6 +150,10 @@
       }
     });
     
+    ///////////////////////////// END MAP CREATION AND CENTERING //////////////////////////////////////
+
+    ///////////////////////////// GET REQUEST TO POPULATE LEFTSIDE LIST AND CREATE MARKERS ON MAP //////////////////////////////////////
+
     var json;
     //Proof of concept of a GET request to our API
     var xhttp = new XMLHttpRequest();
@@ -197,11 +204,13 @@
             })(marker, i));
           }
           
+          //POLYLINE -> Connection creation
+          //TODO: create a separte GET REQUEST to get all connections/supplychains and add information
           var poly = new google.maps.Polyline({
             geodesic: true,
-            strokeColor: '#FF0000',
+            strokeColor: '#000000',
             strokeOpacity: 1.0,
-            strokeWeight: 2
+            strokeWeight: 4
           });
 
           poly.setMap(map);
@@ -219,6 +228,9 @@
     };
     xhttp.open("GET", "https://020e74da.ngrok.io/all_suppliers", true);
     xhttp.send();
+
+    ///////////////////////////// END GET REQUEST TO POPULATE LEFTSIDE LIST AND CREATE MARKERS ON MAP //////////////////////////////////////
+
 
     //////////////////////List all suppliers below the map//////////////////////////
     var xhttp = new XMLHttpRequest();
@@ -242,9 +254,6 @@
             newSupplierBox.appendChild(newHeading);
             newSupplierBox.appendChild(newParagraph);
             grid.appendChild(newSupplierBox)
-            
-
-           
           }
         }else{
           alert("Error retrieving locations from server!")
