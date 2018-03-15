@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+   #map {
+    height: 600px;
+    width: 100%;
+  }
+</style>
+<link rel="stylesheet" href="https://sdks.shopifycdn.com/polaris/1.12.2/polaris.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<h3>My Google Maps Demo</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <h5>Suppliers (Will be changed to Prooducts)</h5>
+      <ol id="demo"></ol>
+      <div class="list-group" id="list"></div>
+    </div>
+    <div class="col-10">
+      <div id="map"></div> 
+      <p id="status"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <h5>Some information</h5>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed. Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus id sem et, gravida sollicitudin ante.
+
+        Sed scelerisque feugiat leo. Nam laoreet, mauris aliquam fermentum accumsan, diam nisl scelerisque ante, eu varius turpis nisi a tellus. Vestibulum condimentum ornare sollicitudin. In consequat placerat tortor, fringilla tristique leo consequat et. Sed pellentesque elementum dolor id venenatis. Vestibulum nisi magna, malesuada in nibh tincidunt, feugiat dignissim turpis. Ut at consequat est, nec scelerisque tellus. Mauris congue turpis quis est viverra dignissim. Aliquam suscipit quam eget lectus varius, a facilisis ligula ultrices. Vivamus tempor ex in orci blandit, vitae accumsan libero pharetra.
+
+        Fusce at viverra dui. Integer rhoncus orci tellus, quis mollis mauris venenatis quis. Nam eu consectetur est. Vestibulum tristique, diam et cursus imperdiet, sem nisi dignissim eros, sed sagittis ligula dui et nibh. Quisque id sapien tellus. Suspendisse tempus non mauris ut gravida. Curabitur euismod malesuada quam, vel tincidunt lorem convallis non. Aliquam eget lorem rutrum, commodo risus at, bibendum mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam scelerisque magna in velit ultricies finibus. Praesent vehicula, metus eget sodales porttitor, orci arcu elementum ex, et volutpat enim purus sit amet lectus.
+      </p>
+    </div>
+    <div class="col-9">
+      <h3>Suppliers</h3>
+      <div class="row" id="grid_suppliers">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <script>
+  function initMap() {
+    //Map styling
+    var styledMapType = new google.maps.StyledMapType(
+      [
+      {elementType: 'geometry', stylers: [{color: '#E5E5E5'}]},
+      {
+        featureType: "administrative",
+        elementType: "labels",
+        stylers: [
+        { visibility: "off" }
+        ]
+      },{
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [
+        { visibility: "off" }
+        ]
+      },
+      {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{color: '#414245'}]
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels.text.fill',
+        stylers: [{color: '#bdbdbd'}]
+      },
+      {
+        featureType: "road",
+        elementType: "labels",
+        stylers: [
+        { visibility: "off" }
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+        {visibility: "off"}
+        ]
+      }
+      ],
+      {name: 'Supply Map'}
+      );
+    //initialize the map
+    var map = new google.maps.Map(document.getElementById('map'), {
+      mapTypeControl: true, //disables switching of map topography
+      center: new google.maps.LatLng(0, 0), //default centering, is changed later
+      zoom: 2,
+      mapTypeId: 'mystyle'
+    });
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+    //html content of the info window as a string
+    var contentStringUnique = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="firstHeading">McGill University</h1>'+
+    '<div id="bodyContent">'+
+    '<p><b>McGill University</b>,  is a coeducational public research university in Montreal, Quebec, Canada. '+
+    'It was established in 1821 by royal charter, granted by King George IV. The University bears the name of James McGill, '+
+    'a Montreal merchant originally from Scotland whose bequest in 1813 formed the university precursor, McGill College.</p>'+
+    '<p>Attribution: McGill University, <a href="https://en.wikipedia.org/wiki/McGill_University">'+
+    'https://en.wikipedia.org/wiki/McGill_University</a> '+
+    '</p>'+
+    '</div>'+
+    '</div>';
+    //initialize the info window
+    //TODO: add products picture, style it
+    var infowindowUnique = new google.maps.InfoWindow({
+      content: contentStringUnique,
+      maxWidth: 300
+    });
+    //Geocode gets the coordinates of the given address
+    var geocoder = new google.maps.Geocoder();
+    //center the map onto Montreal
+    geocoder.geocode({'address': "Montreal"}, function(results, status) {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+    //add a marker at McGill University
+    geocoder.geocode({'address': "McGill University"}, function(results, status) {
+      if (status === 'OK') {
+        //once the address is obtained, create a marker on the specified map
+        var marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map
+        });
+        //add a listener to that particular marker
+        marker.addListener('click', function() {
+          infowindowUnique.open(map, marker);
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+    
+    var json;
+    //Proof of concept of a GET request to our API
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = 
+
+    function() {
+      if (this.readyState == 4) {
+        if(this.status == 200 || this.status == 304){
+          json = this.responseText;
+          var jsonData = JSON.parse(json);
+          // var list = document.getElementById('demo');
+          var newList = document.getElementById("list");
+          var infowindow = new google.maps.InfoWindow();
+          var marker, i;
+          for(i = 0; i< 5; i++){
+            locations = jsonData.data;
+            var newEntry = document.createElement('button');
+            newEntry.innerHTML = locations[i].name.bold()+ " -  Lat: " + locations[i].lattitude + ", Long: " +locations[i].longitude;
+            newEntry.type = "button";
+            newEntry.className = "list-group-item list-group-item-action";
+            newList.appendChild(newEntry)
+            
+
+            //Markers
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude),
+              map: map
+            });
+            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+              return function() {
+                var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">'+jsonData.data[i].name+'</h1>'+
+                '<div id="bodyContent">'+
+                '<p>'+jsonData.data[i].description+
+                '</p>'+
+                '</div>'+
+                '</div>';
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+              }
+            })(marker, i));
+            google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
+              return function() {
+                infowindow.close(map, marker);
+              }
+            })(marker, i));
+          }
+          
+          var poly = new google.maps.Polyline({
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+
+          poly.setMap(map);
+          path = poly.getPath(); 
+          // var supplyChainCoords[5];
+          for(i = 0; i< 5; i++){
+            path.push(new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude));
+          }
+
+
+        }else{
+          alert("Error retrieving locations from server!")
+        }
+      }
+    };
+    xhttp.open("GET", "https://020e74da.ngrok.io/all_suppliers", true);
+    xhttp.send();
+
+    //////////////////////List all suppliers below the map//////////////////////////
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = 
+    function() {
+      if (this.readyState == 4) {
+        if(this.status == 200 || this.status == 304){
+          json = this.responseText;
+          var jsonData = JSON.parse(json);
+          // var list = document.getElementById('demo');
+          var grid = document.getElementById("grid_suppliers");
+          var i;
+          for(i = 0; i < jsonData.data.length; i++){
+            locations = jsonData.data;
+            var newSupplierBox = document.createElement('div');
+            newSupplierBox.className = 'col-4';
+            var newHeading = document.createElement('h5');
+            newHeading.innerHTML = locations[i].name;
+            var newParagraph = document.createElement('p');
+            newParagraph.innerHTML = locations[i].description;
+            newSupplierBox.appendChild(newHeading);
+            newSupplierBox.appendChild(newParagraph);
+            grid.appendChild(newSupplierBox)
+            
+
+           
+          }
+        }else{
+          alert("Error retrieving locations from server!")
+        }
+      }
+    };
+    xhttp.open("GET", "https://020e74da.ngrok.io/all_suppliers", true);
+    xhttp.send();
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgXduZYCxQxxBXDQ5S87uUWL4OIMaNA9I&callback=initMap">
+</script>
+</body>
+</html>
