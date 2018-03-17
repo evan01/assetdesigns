@@ -5,37 +5,58 @@
    #map {
     height: 600px;
     width: 100%;
+    margin-bottom: 20px;
+  }
+  #floating-panel {
+    background: #fff;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Arial;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+    display: none;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    height: 85%;
+
+  }
+  #grid_suppliers h5{
+    text-align: center;
+  }
+
+  #grid_suppliers .col-4{ye
+
+    width: 100%;
+    /*margin: 5px;*/
+    border: 1px solid #ccc;
   }
 </style>
 <link rel="stylesheet" href="https://sdks.shopifycdn.com/polaris/1.12.2/polaris.min.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h3>My Google Maps Demo</h3>
+<div style="padding-top: 20px"></div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2">
-      <h5>Suppliers (Will be changed to Prooducts)</h5>
-      <ol id="demo"></ol>
-      <div class="list-group" id="list"></div>
-    </div>
-    <div class="col-10">
+    <div class="col-12">
+      <div id="floating-panel">
+        <h3>Products</h5>
+        <ol id="demo"></ol>
+        <div class="list-group" id="list"></div>
+      </div>
       <div id="map"></div> 
-      <p id="status"></p>
     </div>
   </div>
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       <h5>Some information</h5>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed. Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus id sem et, gravida sollicitudin ante.
 
-        Sed scelerisque feugiat leo. Nam laoreet, mauris aliquam fermentum accumsan, diam nisl scelerisque ante, eu varius turpis nisi a tellus. Vestibulum condimentum ornare sollicitudin. In consequat placerat tortor, fringilla tristique leo consequat et. Sed pellentesque elementum dolor id venenatis. Vestibulum nisi magna, malesuada in nibh tincidunt, feugiat dignissim turpis. Ut at consequat est, nec scelerisque tellus. Mauris congue turpis quis est viverra dignissim. Aliquam suscipit quam eget lectus varius, a facilisis ligula ultrices. Vivamus tempor ex in orci blandit, vitae accumsan libero pharetra.
-
-        Fusce at viverra dui. Integer rhoncus orci tellus, quis mollis mauris venenatis quis. Nam eu consectetur est. Vestibulum tristique, diam et cursus imperdiet, sem nisi dignissim eros, sed sagittis ligula dui et nibh. Quisque id sapien tellus. Suspendisse tempus non mauris ut gravida. Curabitur euismod malesuada quam, vel tincidunt lorem convallis non. Aliquam eget lorem rutrum, commodo risus at, bibendum mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam scelerisque magna in velit ultricies finibus. Praesent vehicula, metus eget sodales porttitor, orci arcu elementum ex, et volutpat enim purus sit amet lectus.
       </p>
     </div>
-    <div class="col-9">
+    <div class="col-10">
       <h3>Suppliers</h3>
       <div class="row" id="grid_suppliers">
       </div>
@@ -65,14 +86,19 @@
         ]
       },
       {
+        featureType: 'land',
+        elementType: 'geometry',
+        stylers: [{color: '#190729'}]
+      },
+      {
         featureType: 'water',
         elementType: 'geometry',
-        stylers: [{color: '#414245'}]
+        stylers: [{color: '#DDD1E7'}]
       },
       {
         featureType: 'water',
         elementType: 'labels.text.fill',
-        stylers: [{color: '#bdbdbd'}]
+        stylers: [{color: '#000000'}]
       },
       {
         featureType: "road",
@@ -96,11 +122,15 @@
 
     //initialize the map
     var map = new google.maps.Map(document.getElementById('map'), {
-      mapTypeControl: true, //disables switching of map topography
+      mapTypeControl: false, //disables switching of map topography
       center: new google.maps.LatLng(0, 0), //default centering, is changed later
       zoom: 2,
+      minZoom: 1,
       mapTypeId: 'mystyle'
     });
+    var control = document.getElementById('floating-panel');
+    control.style.display = 'block';
+    map.controls[google.maps.ControlPosition.LEFT].push(control);
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
     //html content of the info window as a string
@@ -141,6 +171,7 @@
           position: results[0].geometry.location,
           map: map
         });
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
         //add a listener to that particular marker
         marker.addListener('click', function() {
           infowindowUnique.open(map, marker);
@@ -182,6 +213,7 @@
               position: new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude),
               map: map
             });
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
             google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
               return function() {
                 var contentString = '<div id="content">'+
@@ -208,7 +240,7 @@
           //TODO: create a separte GET REQUEST to get all connections/supplychains and add information
           var poly = new google.maps.Polyline({
             geodesic: true,
-            strokeColor: '#000000',
+            strokeColor: '#0C7718',
             strokeOpacity: 1.0,
             strokeWeight: 4
           });
@@ -226,7 +258,7 @@
         }
       }
     };
-    xhttp.open("GET", "https://020e74da.ngrok.io/all_suppliers", true);
+    xhttp.open("GET", "https://5dcecf51.ngrok.io/all_suppliers", true);
     xhttp.send();
 
     ///////////////////////////// END GET REQUEST TO POPULATE LEFTSIDE LIST AND CREATE MARKERS ON MAP //////////////////////////////////////
@@ -260,7 +292,7 @@
         }
       }
     };
-    xhttp.open("GET", "https://020e74da.ngrok.io/all_suppliers", true);
+    xhttp.open("GET", "https://5dcecf51.ngrok.io/all_suppliers", true);
     xhttp.send();
   }
 </script>
