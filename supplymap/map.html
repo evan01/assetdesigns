@@ -19,16 +19,18 @@
     margin-left: 1%;
     margin-bottom: 1%;
     height: 85%;
+    overflow-y: scroll;
+    max-width: 22%;
 
   }
   #grid_suppliers h5{
     text-align: center;
   }
 
-  #grid_suppliers .col-4{ye
-
+  #grid_suppliers .col-3{
     width: 100%;
-    /*margin: 5px;*/
+    margin: 3%;
+    padding: 1%;
     border: 1px solid #ccc;
   }
 </style>
@@ -36,38 +38,43 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<div style="padding-top: 20px"></div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div id="floating-panel">
-        <h3>Products</h5>
-        <ol id="demo"></ol>
-        <div class="list-group" id="list"></div>
+  <div style="padding-top: 20px"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div id="floating-panel">
+          <h3>Products</h5>
+            <ol id="demo"></ol>
+            <div class="list-group" id="list"></div>
+          </div>
+          <div id="map"></div> 
+        </div>
       </div>
-      <div id="map"></div> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2">
-      <h5>Some information</h5>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed. Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus id sem et, gravida sollicitudin ante.
+      <div class="row">
+        <div class="col-2">
+          <h5>Some information</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed. Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus id sem et, gravida sollicitudin ante.
 
-      </p>
-    </div>
-    <div class="col-10">
-      <h3>Suppliers</h3>
-      <div class="row" id="grid_suppliers">
+          </p>
+        </div>
+        <div class="col-10">
+          <h3>Suppliers</h3>
+          <div class="row" id="grid_suppliers">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
 
- <script>
-  function initMap() {
+    <script>
+
+      var suppliers;
+      var connections;
+      var supplychains;
+      var products;
+    function initMap() {
     //Map styling
     var styledMapType = new google.maps.StyledMapType(
       [
@@ -119,7 +126,6 @@
       );
 
     /////////////////////////////MAP CREATION AND CENTERING //////////////////////////////////////
-
     //initialize the map
     var map = new google.maps.Map(document.getElementById('map'), {
       mapTypeControl: false, //disables switching of map topography
@@ -133,168 +139,178 @@
     map.controls[google.maps.ControlPosition.LEFT].push(control);
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-    //html content of the info window as a string
-    var contentStringUnique = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h1 id="firstHeading" class="firstHeading">McGill University</h1>'+
-    '<div id="bodyContent">'+
-    '<p><b>McGill University</b>,  is a coeducational public research university in Montreal, Quebec, Canada. '+
-    'It was established in 1821 by royal charter, granted by King George IV. The University bears the name of James McGill, '+
-    'a Montreal merchant originally from Scotland whose bequest in 1813 formed the university precursor, McGill College.</p>'+
-    '<p>Attribution: McGill University, <a href="https://en.wikipedia.org/wiki/McGill_University">'+
-    'https://en.wikipedia.org/wiki/McGill_University</a> '+
-    '</p>'+
-    '</div>'+
-    '</div>';
-    //initialize the info window
-    //TODO: add products picture, style it
-    var infowindowUnique = new google.maps.InfoWindow({
-      content: contentStringUnique,
-      maxWidth: 300
-    });
-    //Geocode gets the coordinates of the given address
-    var geocoder = new google.maps.Geocoder();
-    //center the map onto Montreal
-    geocoder.geocode({'address': "Montreal"}, function(results, status) {
-      if (status === 'OK') {
-        map.setCenter(results[0].geometry.location);
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-    //add a marker at McGill University
-    geocoder.geocode({'address': "McGill University"}, function(results, status) {
-      if (status === 'OK') {
-        //once the address is obtained, create a marker on the specified map
-        var marker = new google.maps.Marker({
-          position: results[0].geometry.location,
-          map: map
-        });
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-        //add a listener to that particular marker
-        marker.addListener('click', function() {
-          infowindowUnique.open(map, marker);
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-    
+    getData(map);
     ///////////////////////////// END MAP CREATION AND CENTERING //////////////////////////////////////
-
-    ///////////////////////////// GET REQUEST TO POPULATE LEFTSIDE LIST AND CREATE MARKERS ON MAP //////////////////////////////////////
-
-    var json;
-    //Proof of concept of a GET request to our API
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = 
-
-    function() {
-      if (this.readyState == 4) {
-        if(this.status == 200 || this.status == 304){
-          json = this.responseText;
-          var jsonData = JSON.parse(json);
-          // var list = document.getElementById('demo');
-          var newList = document.getElementById("list");
-          var infowindow = new google.maps.InfoWindow();
-          var marker, i;
-          for(i = 0; i< 5; i++){
-            locations = jsonData.data;
-            var newEntry = document.createElement('button');
-            newEntry.innerHTML = locations[i].name.bold()+ " -  Lat: " + locations[i].lattitude + ", Long: " +locations[i].longitude;
-            newEntry.type = "button";
-            newEntry.className = "list-group-item list-group-item-action";
-            newList.appendChild(newEntry)
-            
-
-            //Markers
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude),
-              map: map
-            });
-            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-              return function() {
-                var contentString = '<div id="content">'+
-                '<div id="siteNotice">'+
-                '</div>'+
-                '<h1 id="firstHeading" class="firstHeading">'+jsonData.data[i].name+'</h1>'+
-                '<div id="bodyContent">'+
-                '<p>'+jsonData.data[i].description+
-                '</p>'+
-                '</div>'+
-                '</div>';
-                infowindow.setContent(contentString);
-                infowindow.open(map, marker);
-              }
-            })(marker, i));
-            google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
-              return function() {
-                infowindow.close(map, marker);
-              }
-            })(marker, i));
-          }
-          
-          //POLYLINE -> Connection creation
-          //TODO: create a separte GET REQUEST to get all connections/supplychains and add information
-          var poly = new google.maps.Polyline({
-            geodesic: true,
-            strokeColor: '#0C7718',
-            strokeOpacity: 1.0,
-            strokeWeight: 4
-          });
-
-          poly.setMap(map);
-          path = poly.getPath(); 
-          // var supplyChainCoords[5];
-          for(i = 0; i< 5; i++){
-            path.push(new google.maps.LatLng(jsonData.data[i].lattitude, jsonData.data[i].longitude));
-          }
-
-
-        }else{
-          alert("Error retrieving locations from server!")
-        }
-      }
-    };
-    xhttp.open("GET", "https://5dcecf51.ngrok.io/all_suppliers", true);
-    xhttp.send();
-
-    ///////////////////////////// END GET REQUEST TO POPULATE LEFTSIDE LIST AND CREATE MARKERS ON MAP //////////////////////////////////////
-
-
-    //////////////////////List all suppliers below the map//////////////////////////
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = 
-    function() {
-      if (this.readyState == 4) {
-        if(this.status == 200 || this.status == 304){
-          json = this.responseText;
-          var jsonData = JSON.parse(json);
-          // var list = document.getElementById('demo');
-          var grid = document.getElementById("grid_suppliers");
-          var i;
-          for(i = 0; i < jsonData.data.length; i++){
-            locations = jsonData.data;
-            var newSupplierBox = document.createElement('div');
-            newSupplierBox.className = 'col-4';
-            var newHeading = document.createElement('h5');
-            newHeading.innerHTML = locations[i].name;
-            var newParagraph = document.createElement('p');
-            newParagraph.innerHTML = locations[i].description;
-            newSupplierBox.appendChild(newHeading);
-            newSupplierBox.appendChild(newParagraph);
-            grid.appendChild(newSupplierBox)
-          }
-        }else{
-          alert("Error retrieving locations from server!")
-        }
-      }
-    };
-    xhttp.open("GET", "https://5dcecf51.ngrok.io/all_suppliers", true);
-    xhttp.send();
   }
+
+  function getData(map) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = 
+    function() {
+      if (this.readyState == 4) {
+        if(this.status == 200 || this.status == 304){
+          var json = this.responseText;
+          var jsonData = JSON.parse(json);
+          suppliers = jsonData.suppliers;
+          connections = jsonData.supplierconnections;
+          supplychains = jsonData.supplychains;
+          products = jsonData.products;
+          addMarkers(suppliers, map);
+          displaySuppliersGrid(suppliers);
+          displaySupplyChains(suppliers, connections, supplychains, map);
+        }else{
+          alert("Error retrieving locations from server!");
+        }
+      }
+    }
+    xhttp.open("GET", "https://5dcecf51.ngrok.io/all_data", true);
+    xhttp.send();
+
+  }
+
+  function addMarkers(suppliers, map) {
+    var marker, i;
+    var infowindow = new google.maps.InfoWindow();
+
+    for(i = 0; i<suppliers.length; i++){
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(suppliers[i].lattitude, suppliers[i].longitude),
+        map: map
+      });
+      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+
+      google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+        return function() {
+          var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">'+suppliers[i].name+'</h1>'+
+          '<div id="bodyContent">'+
+          '<p>'+suppliers[i].description+
+          '</p>'+
+          '</div>'+
+          '</div>';
+          infowindow.setContent(contentString);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+
+      google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
+        return function() {
+          infowindow.close(map, marker);
+        }
+      })(marker, i));
+    }
+  }
+
+  function displaySuppliersGrid(suppliers) {
+    var grid = document.getElementById("grid_suppliers");
+    var i;
+
+    for(i = 0; i < suppliers.length; i++){
+      var newSupplierBox = document.createElement('div');
+      newSupplierBox.className = 'col-3';
+      var newHeading = document.createElement('h5');
+      newHeading.innerHTML = suppliers[i].name;
+      var newParagraph = document.createElement('p');
+      newParagraph.innerHTML = suppliers[i].description;
+      newSupplierBox.appendChild(newHeading);
+      newSupplierBox.appendChild(newParagraph);
+      grid.appendChild(newSupplierBox)
+    }
+  }
+
+  function displaySupplyChains(suppliers, connections, supplychains, map) {
+    supplychains[0].connections = [1,2,5];
+    supplychains[1].connections = [5,4];
+    supplychains[2].connections = [6,7];
+    supplychains[3].connections = [4,7];
+
+    var i;
+    var newList = document.getElementById("list");
+    for(i = 0; i<supplychains.length; i++){
+      (function(map, suppliers, connections, supplychains, newList){
+
+        var polylines = new Array();
+        var newEntry = document.createElement('button');
+        newEntry.innerHTML = "<h4>"+supplychains[i].name.bold()+"</h4>"+"<p>"+supplychains[i].description+"</p>";
+        newEntry.type = "button";
+        newEntry.className = "list-group-item list-group-item-action";
+        newList.appendChild(newEntry);
+        if(supplychains[i].connections.length != 0){
+          var j;
+          //Looping through all connections
+          for(j = 0; j < supplychains[i].connections.length; j++){
+            polylines.push(getConnectionsSuppliers(connections, suppliers, supplychains[i].connections[j]));   
+          }
+          for(var l = 0; l < polylines.length ; l++){
+            console.log(polylines[l].getPath().getArray().toString());
+          }
+
+        }
+        newEntry.addEventListener("click", function(){
+          if(newEntry.className == "list-group-item list-group-item-action active"){
+            newEntry.className = "list-group-item list-group-item-action";
+            for(var l = 0; l < polylines.length ; l++){
+              polylines[l].setMap(null)
+            }
+          }else{
+            newEntry.className = "list-group-item list-group-item-action active";
+            for(var l = 0; l < polylines.length ; l++){
+              polylines[l].setMap(map)
+            }
+          }
+        });
+      }(map, suppliers, connections, supplychains, newList)); 
+    }
+
+  }
+
+  function getConnectionsSuppliers(connections, suppliers, supplychains_conn){
+    var found = false;
+    var conn_index = 0;
+    while(!found && conn_index < connections.length){
+      if(supplychains_conn == connections[conn_index].id){
+        found = true;
+      }else{
+        conn_index = conn_index +1;
+      }
+    }
+    var supplier_id_1 = connections[conn_index].supplier_a_id;
+    var supplier_id_2 = connections[conn_index].supplier_b_id;
+    // console.log("ID: "+supplychains[i].connections[j]+" supplierA: "+supplier_id_1+" supplierB: "+supplier_id_2);
+
+    var found1 = false;
+    var found2 = false;
+    var supplier1, supplier2;
+    var supp_index = 0;
+    while((!found1 || !found2) && supp_index < suppliers.length){
+      if(supplier_id_1 == suppliers[supp_index].id){
+        found1 = true;
+        supplier1 = suppliers[supp_index];
+      }
+      if(supplier_id_2 == suppliers[supp_index].id){
+        found2 = true;
+        supplier2 = suppliers[supp_index];
+      }
+      supp_index = supp_index +1;
+    }
+    // console.log("SupplierA: "+supplier1.name+" "+supplier1.lattitude + " "+supplier1.longitude);
+    // console.log("SupplierB: "+supplier2.name+" "+supplier2.lattitude + " "+supplier2.longitude);
+    var poly = new google.maps.Polyline({
+      geodesic: true,
+      strokeColor: '#0C7718',
+      strokeOpacity: 1.0,
+      strokeWeight: 4
+    });
+    path = poly.getPath(); 
+    //Add coordinates to polyline
+    path.push(new google.maps.LatLng(supplier1.lattitude, supplier1.longitude));
+    path.push(new google.maps.LatLng(supplier2.lattitude, supplier2.longitude)); 
+    return poly;
+  }
+
+  // }
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgXduZYCxQxxBXDQ5S87uUWL4OIMaNA9I&callback=initMap">
