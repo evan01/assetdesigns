@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :product_types
   root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
   
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   get 'all_shops/' => 'data#all_shops'
   get 'all_suppliers/' => 'data#all_suppliers'
   get 'all_supplychains/' => 'data#all_supplychains'
+  get 'all_connections/' => 'data#all_connections'
+  get 'all_data/' => 'data#all_data'
 
   # Supply chains RESTful API (see supply_chains_controller.rb for controller and 
   # views/supply_chains/ for html pages to show, modify and create new supply chains)
