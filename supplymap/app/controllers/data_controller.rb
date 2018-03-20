@@ -25,4 +25,19 @@ class DataController < ApplicationController
         supplychains = SupplyChain.all
         render json: {status: 'SUCCESS', message: 'Loaded all supplychains data', data: supplychains}, status: :ok
     end 
+
+    def all_connections
+        p "Requesting all connections data!"
+        supplierconnections = SupplierConnection.all
+        render json: {status: 'SUCCESS', message: 'Loaded all supplierconnections data', data: supplierconnections}, status: :ok
+    end
+
+    def all_data
+        p "Requesting all connections data!"
+        supplierconnections = SupplierConnection.all
+        supplychains = SupplyChain.all
+        suppliers = Supplier.all
+
+        render json: {status: 'SUCCESS', message: 'Loaded all data', supplychains: supplychains, suppliers: suppliers, supplierconnections: supplierconnections}, status: :ok
+    end 
 end
