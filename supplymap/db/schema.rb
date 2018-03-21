@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311202558) do
+ActiveRecord::Schema.define(version: 20180321192532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,20 +38,27 @@ ActiveRecord::Schema.define(version: 20180311202558) do
     t.integer "supplier_b_id", null: false
     t.decimal "co2_emission"
     t.decimal "distance"
+    t.bigint "supply_chain_id"
+    t.index ["supply_chain_id"], name: "index_supplier_connections_on_supply_chain_id"
   end
 
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.string "product_kind"
     t.text "description"
-    t.bigint "supply_chain_id"
     t.decimal "lattitude"
     t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order"
+    t.string "image_url"
     t.index ["name"], name: "index_suppliers_on_name"
-    t.index ["supply_chain_id"], name: "index_suppliers_on_supply_chain_id"
+  end
+
+  create_table "suppliers_supply_chains", id: false, force: :cascade do |t|
+    t.bigint "supply_chain_id"
+    t.bigint "supplier_id", null: false
+    t.index ["supply_chain_id"], name: "index_suppliers_supply_chains_on_supply_chain_id"
   end
 
   create_table "supply_chains", force: :cascade do |t|
@@ -64,5 +71,6 @@ ActiveRecord::Schema.define(version: 20180311202558) do
   end
 
   add_foreign_key "products", "supply_chains"
-  add_foreign_key "suppliers", "supply_chains"
+  add_foreign_key "supplier_connections", "supply_chains"
+  add_foreign_key "suppliers_supply_chains", "supply_chains"
 end
