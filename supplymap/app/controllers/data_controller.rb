@@ -22,7 +22,7 @@ class DataController < ApplicationController
 
     def all_supplychains 
         p "Requesting all supplychains data!"
-        supplychains = SupplyChain.all
+        supplychains = SupplyChain.includes(:supplier_connections).as_json(include: [:supplier_connections])
         render json: {status: 'SUCCESS', message: 'Loaded all supplychains data', data: supplychains}, status: :ok
     end 
 
