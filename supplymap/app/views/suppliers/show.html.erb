@@ -29,6 +29,11 @@ table, th, td {
     <th>Longitude</th>
     <th><%= @supplier.longitude %></th>
   </tr>
+  <tr>
+    <th>Image</th>
+    <th><%= image_tag @supplier.image.url %> </th>
+    <th><%= link_to 'Remove Image', remove_image_supplier_path(@supplier), :method => :delete %></th>
+  </tr>
 </table>
 
 <p>

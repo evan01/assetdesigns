@@ -24,7 +24,11 @@
       <th><%= s.label :longitude %></th>
       <th><%= s.text_field :longitude %></th>
     </tr>
+    <tr>
+      <th>Supplier Image</th>
+      <th><%= s.file_field :image %></th>
+    </tr>
   </table>
 
-  <p><button class="btn btn-success" type="submit">Save</button> </p>
-<% end %> 
+  <%= s.submit 'Save', class: 'btn btn-success' %>
+<% end %>
