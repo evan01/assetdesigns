@@ -13,6 +13,7 @@ class SupplyChainsController < ApplicationController
     # Show supplier
     def show
         @supplychain = SupplyChain.find(params[:id])
+				@suppliers = Supplier.find_by supply_chain_id: params[:id]
     end
 
     # New supplier and create
