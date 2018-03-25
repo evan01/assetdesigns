@@ -1,13 +1,27 @@
-<p>
-  <%= link_to supplier_path, class: "btn btn-success btn-sm" do %>
-    <i class="glyphicon glyphicon-plus"></i>
-    <span>Suppliers</span>
-  <% end %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      Suppliers
+    </div>
+    <div class="col-md-6">
+      Supply Chains
+    </div>
+  </div>
 
-<p>
-  <%= link_to supply_chain_path, class: "btn btn-success btn-sm" do %>
-    <i class="glyphicon glyphicon-plus"></i>
-    <span>SupplyChains</span>
-  <% end %>
-</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="list-group">
+        <%= Supplier.find_each do |s| %>
+        <a href="#" class="list-group-item active">
+          <!-- <%= image_tag s.image.url, class: "img-thumbnail" %> -->
+          <h4 class="list-group-item-heading">First List Group Item Heading</h4>
+          <p class="list-group-item-text">List Group Item Text</p>
+        </a>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
