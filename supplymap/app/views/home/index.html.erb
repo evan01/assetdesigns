@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      Suppliers
+      <h4>Suppliers</h4>
     </div>
     <div class="col-md-6">
-      Supply Chains
+      <h4>Supply Chains</h4>
     </div>
   </div>
 
@@ -12,16 +12,33 @@
     <div class="col-md-6">
       <div class="list-group">
         <%= Supplier.find_each do |s| %>
-        <a href="#" class="list-group-item active">
-          <!-- <%= image_tag s.image.url, class: "img-thumbnail" %> -->
-          <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-          <p class="list-group-item-text">List Group Item Text</p>
-        </a>
+        <div class="media list-group-item list-group-item-action flex-column align-items-start">
+          <div class="media-left">
+            <% if s.image.file? %>
+              <%= image_tag s.image.url, class: "img-responsive", :size => "180x124", :crop => :fill%>
+            <% end %>
+            <h4 class="list-group-item-heading"><%= s.name %></h4>
+            <p class="list-group-item-text">Location: Lat <%= s.lattitude %> Long <%= s.longitude %> </p>
+            <p class="list-group-item-text">Description: <%= s.description %></p>
+            <%= link_to edit_supplier_path(s), class: "btn btn-primary btn-sm" do %>
+              <span> Edit Supplier </span>
+            <% end %>
+          </div>
+        </div>
         <% end %>
       </div>
 
     </div>
     <div class="col-md-6">
+      <div class="list-group">
+        <%= SupplierConnection.find_each do |s| %>
+        <div class="media list-group-item list-group-item-action flex-column align-items-start">
+          <h4 class="list-group-item-heading">From : <%= Supplier.find(s.supplier_a_id).name %> to <%= Supplier.find(s.supplier_b_id).name %></h4>
+          <p class="list-group-item-text">CO2 Emission: <%= s.co2_emission %></p>
+          <p class="list-group-item-text">Distance: <%= s.distance %></p>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
