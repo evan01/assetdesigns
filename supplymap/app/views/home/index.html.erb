@@ -36,11 +36,15 @@
     </div>
     <div class="col-md-6">
       <div class="list-group">
-        <%= SupplierConnection.find_each do |s| %>
+        <%= SupplyChain.find_each do |s| %>
         <div class="media list-group-item list-group-item-action flex-column align-items-start">
-          <h4 class="list-group-item-heading">From : <%= Supplier.find(s.supplier_a_id).name %> to <%= Supplier.find(s.supplier_b_id).name %></h4>
-          <p class="list-group-item-text">CO2 Emission: <%= s.co2_emission %></p>
-          <p class="list-group-item-text">Distance: <%= s.distance %></p>
+          <h4 class="list-group-item-heading"><%= s.name %> </h4>
+          <h4 class="list-group-item-heading">From  <%= %>: to <%= %></h4>
+          <p class="list-group-item-text">CO2 Emission: <%=  s.total_co2_emission %></p>
+          <p class="list-group-item-text">Distance: <%=  %></p>
+					<%= link_to edit_supply_chain_path(s), class: "btn btn-primary btn-sm" do %>
+        		<span> Edit Supply Chain </span>
+        	<% end %>
         </div>
         <% end %>
       </div>

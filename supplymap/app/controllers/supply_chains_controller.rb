@@ -35,6 +35,7 @@ class SupplyChainsController < ApplicationController
     # Edit and update supplier
     def edit
         @supplychain = SupplyChain.find(params[:id])
+				@suppliers = Supplier.where(supply_chain_id: params[:id])
     end
 
     def update
