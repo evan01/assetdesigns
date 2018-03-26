@@ -42,7 +42,7 @@
           <h4 class="list-group-item-heading">From  <%= %>: to <%= %></h4>
           <p class="list-group-item-text">CO2 Emission: <%=  s.total_co2_emission %></p>
           <p class="list-group-item-text">Distance: <%=  %></p>
-					<%= link_to edit_supply_chain_path(s), class: "btn btn-primary btn-sm" do %>
+					<%= link_to supply_chain_path(s), class: "btn btn-primary btn-sm" do %>
         		<span> Edit Supply Chain </span>
         	<% end %>
         </div>
