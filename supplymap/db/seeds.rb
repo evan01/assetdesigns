@@ -19,27 +19,23 @@ Supply_Chain_List.each do |name, description|
 end
 
 Suppliers_List = [
-    ["Lanister", "Shirts", "Always pay your debts", 1, -77.03, 38.895, 1],
-    ["Stark", "hoodies", "Winter is coming",2, 23.4,-20.4, 1],
-    ["Targarian", "jackets", "Our queen is 10/10 better than your queen", 3, 15.4, 5.90, 1],
-    ["Tyrell", "bags", "Margaery noooooooooo </3", 2, 4.42, 10.3, 2],
-    ["Baratheon", "hunting equipment", "Invade! Oh... ok maybe not", 1, -78.3, 56.4223, 3],
-    ["Greyjoy", "Bathing Suits", "Just keep swimming", 1, -77.03, 38.895, 2],
+    ["Lanister", "Shirts", "Always pay your debts", -77.03, 38.895, 1, [1,3]],
+    ["Stark", "hoodies", "Winter is coming", 23.4,-20.4, 1],
+    ["Targarian", "jackets", "Our queen is 10/10 better than your queen", 15.4, 5.90, 1, [2]],
+    ["Tyrell", "bags", "Margaery noooooooooo </3", 4.42, 10.3, 2, [3,4]],
+    ["Baratheon", "hunting equipment", "Invade! Oh... ok maybe not", -78.3, 56.4223, 3, [1]],
+    ["Greyjoy", "Bathing Suits", "Just keep swimming", -77.03, 38.895, 2, [1]],
 ]
 
-Suppliers_List.each do |name, type, description, supply_chain_id, lattitude, longitude, order|
-  Supplier.create( name:name, product_kind:type, description:description, supply_chain_id:supply_chain_id, lattitude:lattitude, longitude:longitude, order:order)
+Suppliers_List.each do |name, type, description, lattitude, longitude, order, supply_chain_ids|
+  Supplier.create( name:name, product_kind:type, description:description, lattitude:lattitude, longitude:longitude, order:order, supply_chain_ids:supply_chain_ids)
 end
 
 Supplier_Connection_List = [
-    [1, 2, 50, 11830],
-    [1, 3, 40, 3434],
-    [2, 3, 5, 10],
-    [3, 4, 100, 433020],
-    [4, 5, 40, 32123],
-    [5, 6, 32, 3243241]
-
+    [1, 1, 5, 50, 11830],
+    [1, 5, 6, 40, 3434],
+    [3, 1, 4, 5, 10],
 ]
-Supplier_Connection_List.each do |supplier_a_id, supplier_b_id, co2_emission, distance|
- SupplierConnection.create(supplier_a_id:supplier_a_id, supplier_b_id:supplier_b_id, co2_emission:co2_emission, distance:distance)
+Supplier_Connection_List.each do |supply_chain_id, supplier_a_id, supplier_b_id, co2_emission, distance|
+ SupplierConnection.create(supply_chain_id:supply_chain_id, supplier_a_id:supplier_a_id, supplier_b_id:supplier_b_id, co2_emission:co2_emission, distance:distance)
 end
