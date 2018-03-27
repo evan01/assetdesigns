@@ -68,21 +68,21 @@ class SupplyChain < ActiveRecord::Base
 		# Get all the connections in the supply chain
 		supply_chain_connections = SupplierConnection.where(supply_chain_id: self.id)
 	
-		# Algorithm to find the origin supplier: Set the child_connection to a random connection (in this case the first one, it 
+		# Algorithm to find the final supplier: Set the child_connection to a random connection (in this case the first one, it 
 		# doesn't matter). While there exists a connection whose supplier_a_id corresponds to the child_connection's supplier_b_id 
-		# (i.e.: there exists a connection downstream of the child_connection), set the origin_connection to the child_connection
+		# (i.e.: there exists a connection downstream of the child_connection), set the final_connection to the child_connection
 		# and find the next child_connection (if it exists). Note that "child" means "closer to the end of the suply chain".
 		child_connection = supply_chain_connections[0]
-		origin_correction = nil
+		final_correction = nil
 		while (child_connection != nil) do
-			origin_connection = child_connection
-			child_connection = supply_chain_connections.find_by supplier_a_id: origin_connection.supplier_b_id
+			final_connection = child_connection
+			child_connection = supply_chain_connections.find_by supplier_a_id: final_connection.supplier_b_id
 		end
 	
 		# Get and return origin supplier
-		if (origin_connection != nil)
-			origin_supplier = Supplier.find(origin_connection.supplier_a_id)
-			origin_supplier.name
+		if (final_connection != nil)
+			final_supplier = Supplier.find(final_connection.supplier_b_id)
+			final_supplier.name
 		else
 			""
 		end

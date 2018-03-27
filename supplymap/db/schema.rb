@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20180323164713) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["supply_chain_id"], name: "index_suppliers_on_supply_chain_id"
     t.index ["name"], name: "index_suppliers_on_name"
   end
 
