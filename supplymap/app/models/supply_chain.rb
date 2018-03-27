@@ -2,30 +2,90 @@ class SupplyChain < ActiveRecord::Base
 	has_and_belongs_to_many :suppliers
 	has_many :supplier_connections
 	
-	# Method that calculates the total emissions of the full supply chain
-	def total_co2_emission
-		# Get all the suppliers present in the supply chain
-		@suppliers = Supplier.where(supply_chain_id: self.id)
+	# Method that calculates the total emissions of all the connections in the supply chain
+	def getTotalCO2Emissions
+		# Get all the connections in the supply chain
+		supply_chain_connections = SupplierConnection.where(supply_chain_id: self.id)
 		
-		# Get all the connections in the supply chain (must go through suppliers since no direct reference between
-		# supply_chain and supplier_connnectioni)
-
-		@all_connections = SupplierConnection.all
-		@supply_chain_connections = []
-		@all_connections.each do |c|
-			if (@suppliers.include?(Supplier.find(c.supplier_a_id)) && @suppliers.include?(Supplier.find(c.supplier_b_id)))
-				@supply_chain_connections.push(c)
-			end
+		# Add up all co2 emissions
+		total_co2 = 0
+		supply_chain_connections.each do |c|
+			total_co2 += c.co2_emission
 		end
 
-		# Remove duplicates
-		@supply_chain_connections.uniq
+		# Return the total co2 emissions
+		total_co2
+	end
 
-		@total_co2 = 0
-		@supply_chain_connections.each do |c|
-			@total_co2 += c.co2_emission
+	# Method that calculates the total distance of all the connections in the supply chain
+	def getTotalDistance
+		# Get all the connections in the supply chain
+		supply_chain_connections = SupplierConnection.where(supply_chain_id: self.id)
+		
+		# Add up all distances
+		total_distance = 0
+		supply_chain_connections.each do |c|
+			total_distance += c.distance
 		end
 
-		@total_co2
+		# Return the total distance
+		total_distance
+	end
+
+	# Method to get the origin of the supply chain
+	# Note: this assumed that the connections belonging to this supply chain are "linked" in the sense that the supplier_b of one 
+	# of the connection corresponds to the supplier_a of another connection (unless they are the first or last connection). 
+	# In theory that should be the case. If not, the method returns the supplier_a of the first connection belonging to this supply chain
+	def getOriginSupplier
+		# Get all the connections in the supply chain
+		supply_chain_connections = SupplierConnection.where(supply_chain_id: self.id)
+	
+		# Algorithm to find the origin supplier: Set the parent_connection to a random connection (in this case the first one, it 
+		# doesn't matter). While there exists a connection whose supplier_b_id corresponds to the parent_connection's supplier_a_id 
+		# (i.e.: there exists a connection upstream of the parent_connection), set the origin_connection to the parent_connection
+		# and find the next parent connection (if it exists). Note that "parent" means "closer to the start of the suply chain".
+		parent_connection = supply_chain_connections[0]
+		origin_correction = nil
+		while (parent_connection != nil) do
+			origin_connection = parent_connection
+			parent_connection = supply_chain_connections.find_by supplier_b_id: origin_connection.supplier_a_id
+		end
+	
+		# Get and return origin supplier
+		if (origin_connection != nil)
+			origin_supplier = Supplier.find(origin_connection.supplier_a_id)
+			origin_supplier.name
+		else
+			""
+		end
+	end
+
+	# Method to get the final point of the supply chain
+	# Note: this assumed that the connections belonging to this supply chain are "linked" in the sense that the supplier_b of one 
+	# of the connection corresponds to the supplier_a of another connection (unless they are the first or last connection). 
+	# In theory that should be the case. If not, the method returns the supplier_a of the first connection belonging to this supply chain
+	def getFinalSupplier
+		# Get all the connections in the supply chain
+		supply_chain_connections = SupplierConnection.where(supply_chain_id: self.id)
+	
+		# Algorithm to find the origin supplier: Set the child_connection to a random connection (in this case the first one, it 
+		# doesn't matter). While there exists a connection whose supplier_a_id corresponds to the child_connection's supplier_b_id 
+		# (i.e.: there exists a connection downstream of the child_connection), set the origin_connection to the child_connection
+		# and find the next child_connection (if it exists). Note that "child" means "closer to the end of the suply chain".
+		child_connection = supply_chain_connections[0]
+		origin_correction = nil
+		while (child_connection != nil) do
+			origin_connection = child_connection
+			child_connection = supply_chain_connections.find_by supplier_a_id: origin_connection.supplier_b_id
+		end
+	
+		# Get and return origin supplier
+		if (origin_connection != nil)
+			origin_supplier = Supplier.find(origin_connection.supplier_a_id)
+			origin_supplier.name
+		else
+			""
+		end
+
 	end
 end
