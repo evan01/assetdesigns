@@ -21,7 +21,11 @@ test:
   database: db/supply_chain_test
 
 production:
-  <<: *default
-  database: db/supply_chain_production
-  username: asset-designs-supply-chain
-  password: <%= ENV['DB_PASS'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: "postgres"
+  password: "shopify2018"
+  database: "production_database"
+  host:   "/cloudsql/assetdesignsmap:europe-west1:assetdesignsdatabase"

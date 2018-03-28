@@ -61,3 +61,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'shopify_app'
 gem 'rack-cors', :require => 'rack/cors'
 ruby "2.4.1"
+
+# Added at 2018-03-28 15:38:58 -0400 by eknox:
+gem "appengine", "~> 0.4.5"
