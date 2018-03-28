@@ -4,4 +4,5 @@ class Supplier < ActiveRecord::Base
  	has_many :suppliers, :through => :supplier_connections, :source => :supplier_b
 	has_attached_file :image
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+	has_and_belongs_to_many :supply_chains
 end
