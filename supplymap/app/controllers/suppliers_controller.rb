@@ -54,9 +54,17 @@ class SuppliersController < ApplicationController
         redirect_to suppliers_path
     end
 
+    def remove_image
+        @supplier = Supplier.find params[:id]
+        @supplier.image.destroy
+        @supplier.save
+        redirect_to @supplier
+
+    end
+
     private
 
     def supplier_params
-        params.require(:supplier).permit(:name, :product_kind, :description, :lattitude, :longitude)
+        params.require(:supplier).permit(:name, :product_kind, :description, :lattitude, :longitude, :image)
     end
 end

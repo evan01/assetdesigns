@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(version: 20180321192532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order"
-    t.string "image_url"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["name"], name: "index_suppliers_on_name"
   end
 
@@ -67,7 +70,6 @@ ActiveRecord::Schema.define(version: 20180321192532) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_supply_chains_on_name"
   end
 
   add_foreign_key "products", "supply_chains"
