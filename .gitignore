@@ -6,3 +6,6 @@ theme/config.yml
 supplymap/config/initializers/shopify_app.rb
 supplymap/config/database.yml
 supplymap/app.yaml
+supplymap/public/*
+supplymap/config/database.yml
+supplymap/config/initializers/shopify_app.rb
