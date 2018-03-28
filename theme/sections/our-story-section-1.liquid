@@ -1,5 +1,4 @@
-
-
+{% if section.settings.image != blank and section.settings.text != "" %}
 <div class="wrapper row">
   <div class="page-width feature-row">
     {% capture image_layout %}
@@ -49,6 +48,7 @@
     </div>
   </div>
 </div>
+{% endif %}
 
 {% schema %}
   {
@@ -102,16 +102,6 @@
         "id": "text",
         "label": "Text",
         "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
-      },
-      {
-        "type": "text",
-        "id": "button_label",
-        "label": "Button label"
-      },
-      {
-        "type": "url",
-        "id": "button_link",
-        "label": "Button link"
       }
     ],
     "presets": [

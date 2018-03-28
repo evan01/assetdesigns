@@ -2312,7 +2312,7 @@ $socialIconFontStack: 'icons';
 .rte--indented-images {
   img:not([style]),
   img[style="float: none;"] {
-    max-width: 120%;
+    max-width: none; //120%
     margin-left: -10%;
 
     // Class added if image isn't wider than parent
@@ -3119,34 +3119,21 @@ $socialIconFontStack: 'icons';
   }
 }
 
-.press-item {
-	display: flex;
-  	margin-bottom: 30px;
+//Press Page Redesign
+
+#press .main-content .wrapper {
+	margin-bottom: -80px;
 }
 
-.site-header:hover a{
-  color: black;
-}
-
-.press-image-left, .press-image-right {
-  min-width: 45%;
-}
-
-.press-link-right {
-	margin-top: 8%;
-  	margin-left: 20px;
-}
-
-.press-link-left {
-  	margin-top: 8%;
-  	margin-right: 20px;
+#press .main-content .shopify-section .wrapper {
+	margin-bottom: 20px;
 }
 
 .site-header:hover{
-	background-color: #FFFAFA;
-	transition: 1s ease;
+        background-color: #FFFAFA;
+        transition: 1s ease;
 }
 
 .site-header:hover a{
-	color: black;
+        color: black;
 }
