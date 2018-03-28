@@ -3,3 +3,6 @@ theme/config.yml
 .idea/
 *.DS_Store
 *.code-workspace
+supplymap/config/initializers/shopify_app.rb
+supplymap/config/database.yml
+supplymap/app.yaml
