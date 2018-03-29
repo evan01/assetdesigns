@@ -3,7 +3,7 @@
 <head>
     <style>
         #map {
-            height: 700px;
+            height: 600px;
             width: 100%;
             margin-bottom: 20px;
         }
@@ -12,6 +12,7 @@
             background: #fff;
             padding: 10px;
             font-size: 14px;
+            font-family: Arial;
             border: 1px solid #ccc;
             box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
             display: none;
@@ -25,14 +26,44 @@
         }
 
         #grid_suppliers h5 {
-            text-align: center;
+            padding-top: 2%;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #grid_suppliers p {
+            margin-bottom: 0;
+        }
+
+        #grid_suppliers .suppliers-image {
+            width: 100%;
+        }
+
+        #grid_suppliers .suppliers-details {
+            color: #387aaf;
+            padding: 5%;
         }
 
         #grid_suppliers .col-3 {
             width: 100%;
             margin: 3%;
-            padding: 1%;
-            border: 1px solid #ccc;
+            padding-right: 0;
+            padding-left: 0;
+            border: 1px solid #387aaf;
+            text-align: center;
+        }
+
+        #content .row {
+            padding: 1% 8%;
+        }
+
+        .supplier-images--info > img {
+            width: 100%;
+            margin: 0;
+        }
+
+        .supplier-details--info p {
+            font-size: 20px;
         }
 
         .full-width {
@@ -49,23 +80,23 @@
         }
     </style>
     <link rel="stylesheet" href="../theme/assets/bootstrap.min.css" crossorigin="anonymous">
-    <script src="../theme/assets/map.js"></script>
-
 </head>
 <body>
+<div style="padding-top: 20px"></div>
 <div class="bootstrap full-width">
-    <div style="padding-top: 20px"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div id="floating-panel">
                     <h3>Products</h3>
-                        <ol id="demo"></ol>
-                        <div class="list-group" id="list"></div>
+                    <ol id="demo"></ol>
+                    <div class="list-group" id="list"></div>
+                    <hr width="80%">
                 </div>
                 <div id="map"></div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-2">
                 <h3>Some information</h3>
@@ -91,7 +122,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     function initMap() {
@@ -182,10 +212,9 @@
                         alert("Error retrieving locations from server!");
                     }
                 }
-            }
-        xhttp.open("GET", "http://localhost:3000/all_data", true);
+            };
+        xhttp.open("GET", "https://6139e461.ngrok.io/all_data", true);
         xhttp.send();
-
     }
 
     function addMarkers(suppliers, map) {
@@ -203,14 +232,20 @@
                 return function () {
                     var contentString = '<div id="content">' +
                         '<div id="siteNotice">' +
-                        '</div>' +
+                        '</div>' + '<div class="row">' +
+                        '<div class="supplier-details--info col-6">' +
                         '<h1 id="firstHeading" class="firstHeading">' + suppliers[i].name + '</h1>' +
                         '<div id="bodyContent">' +
                         '<p>' + suppliers[i].description +
-                        '</p>' +
+                        '</p>' + '</div>' +
+                        '</div>' + '<div class="supplier-images--info col-6">' +
+                        '<img src="' + suppliers[i].image_url + '">' +
+                        '</div>' +
                         '</div>' +
                         '</div>';
                     infowindow.setContent(contentString);
+                    infowindow.open(map, marker);
+
                     infowindow.open(map, marker);
                 }
             })(marker, i));
@@ -230,18 +265,22 @@
         for (i = 0; i < suppliers.length; i++) {
             var newSupplierBox = document.createElement('div');
             newSupplierBox.className = 'col-3';
+            var newImage = document.createElement('img');
+            newImage.className = 'suppliers-image';
+            newImage.src = suppliers[i].image_url;
+            var newDetails = document.createElement('div');
+            newDetails.className = 'suppliers-details';
             var newHeading = document.createElement('h5');
             newHeading.innerHTML = suppliers[i].name;
             var newParagraph = document.createElement('p');
             newParagraph.innerHTML = suppliers[i].description;
-
-
-            newSupplierBox.appendChild(newHeading);
-            newSupplierBox.appendChild(newParagraph);
-            grid.appendChild(newSupplierBox)
+            newSupplierBox.appendChild(newImage);
+            newDetails.appendChild(newHeading);
+            newDetails.appendChild(newParagraph);
+            newSupplierBox.appendChild(newDetails);
+            grid.appendChild(newSupplierBox);
         }
     }
-
     function displaySupplyChains(suppliers, connections, supplychains, map) {
         supplychains[0].connections = [1, 2, 6];
         supplychains[1].connections = [1, 6];
@@ -351,13 +390,7 @@
         })(poly));
 
         return poly;
-    }
-    function img_create(src, alt, title) {
-        var img = IEWIN ? new Image() : document.createElement('img');
-        img.src = src;
-        if ( alt != null ) img.alt = alt;
-        if ( title != null ) img.title = title;
-        return img;
+
     }
 </script>
 <script async defer

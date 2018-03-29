@@ -3,7 +3,7 @@
 <head>
     <style>
         #map {
-            height: 700px;
+            height: 600px;
             width: 100%;
             margin-bottom: 20px;
         }
@@ -12,6 +12,7 @@
             background: #fff;
             padding: 10px;
             font-size: 14px;
+            font-family: Arial;
             border: 1px solid #ccc;
             box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
             display: none;
@@ -25,14 +26,44 @@
         }
 
         #grid_suppliers h5 {
-            text-align: center;
+            padding-top: 2%;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #grid_suppliers p {
+            margin-bottom: 0;
+        }
+
+        #grid_suppliers .suppliers-image {
+            width: 100%;
+        }
+
+        #grid_suppliers .suppliers-details {
+            color: #387aaf;
+            padding: 5%;
         }
 
         #grid_suppliers .col-3 {
             width: 100%;
             margin: 3%;
-            padding: 1%;
-            border: 1px solid #ccc;
+            padding-right: 0;
+            padding-left: 0;
+            border: 1px solid #387aaf;
+            text-align: center;
+        }
+
+        #content .row {
+            padding: 1% 8%;
+        }
+
+        .supplier-images--info > img {
+            width: 100%;
+            margin: 0;
+        }
+
+        .supplier-details--info p {
+            font-size: 20px;
         }
 
         .full-width {
@@ -54,44 +85,43 @@
 
 </head>
 <body>
-<div class="bootstrap full-width">
-    <div style="padding-top: 20px"></div>
+  <div class="bootstrap full-width">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div id="floating-panel">
-                    <h3>Products</h3>
-                        <ol id="demo"></ol>
-                        <div class="list-group" id="list"></div>
-                </div>
-                <div id="map"></div>
-            </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="floating-panel">
+            <h3>Products</h3>
+            <ol id="demo"></ol>
+            <div class="list-group" id="list"></div>
+          </div>
+          <div id="map"></div>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <h3>Some information</h3>
-                <p id="info">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum
-                    at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis
-                    magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed.
-                    Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam
-                    in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque
-                    nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a
-                    turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium
-                    felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget
-                    massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus
-                    id sem et, gravida sollicitudin ante.
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <h3>Some information</h3>
+          <p id="info">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum
+            at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis
+            magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed.
+            Vestibulum aliquet ut nunc non sagittis. Pellentesque magna eros, iaculis et ultrices eget, aliquam
+            in lectus. In consequat, ligula non elementum molestie, sapien dui tincidunt dui, a malesuada neque
+            nunc vitae velit. Pellentesque non leo eu arcu viverra consequat. Integer a viverra mi. Donec a
+            turpis nunc. Donec non placerat urna. Praesent sagittis lorem facilisis ex molestie, eu pretium
+            felis convallis. Vestibulum sapien eros, efficitur id condimentum et, mollis nec nisi. Duis eget
+            massa eget dui feugiat volutpat. Curabitur at ex id sem rutrum consequat. Donec ipsum odio, finibus
+            id sem et, gravida sollicitudin ante.
 
-                </p>
-            </div>
-            <div class="col-10">
-                <h3 id="supplier">Suppliers</h3>
-                <div class="row" id="grid_suppliers">
-                </div>
-            </div>
+          </p>
         </div>
+        <div class="col-10">
+          <h3 id="supplier">Suppliers</h3>
+          <div class="row" id="grid_suppliers">
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
 
