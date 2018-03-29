@@ -3,7 +3,7 @@
 <head>
     <style>
         #map {
-            height: 600px;
+            height: 700px;
             width: 100%;
             margin-bottom: 20px;
         }
@@ -12,7 +12,6 @@
             background: #fff;
             padding: 10px;
             font-size: 14px;
-            font-family: Arial;
             border: 1px solid #ccc;
             box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
             display: none;
@@ -40,8 +39,17 @@
             max-width: 100%;
             margin: auto;
         }
+
+        #supplier{
+            text-align: center;
+        }
+
+        #info{
+            text-align: justify;
+        }
     </style>
     <link rel="stylesheet" href="../theme/assets/bootstrap.min.css" crossorigin="anonymous">
+    <script src="../theme/assets/map.js"></script>
 
 </head>
 <body>
@@ -51,7 +59,7 @@
         <div class="row">
             <div class="col-12">
                 <div id="floating-panel">
-                    <h3>Products</h5>
+                    <h3>Products</h3>
                         <ol id="demo"></ol>
                         <div class="list-group" id="list"></div>
                 </div>
@@ -60,8 +68,8 @@
         </div>
         <div class="row">
             <div class="col-2">
-                <h5>Some information</h5>
-                <p>
+                <h3>Some information</h3>
+                <p id="info">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel leo ut nisi pellentesque rutrum
                     at porttitor sem. Nam eros dolor, sodales eu nulla id, dapibus volutpat leo. Sed tincidunt quam quis
                     magna elementum, nec tempor turpis bibendum. Donec sodales gravida est, id finibus nisi euismod sed.
@@ -76,7 +84,7 @@
                 </p>
             </div>
             <div class="col-10">
-                <h3>Suppliers</h3>
+                <h3 id="supplier">Suppliers</h3>
                 <div class="row" id="grid_suppliers">
                 </div>
             </div>
@@ -226,6 +234,8 @@
             newHeading.innerHTML = suppliers[i].name;
             var newParagraph = document.createElement('p');
             newParagraph.innerHTML = suppliers[i].description;
+
+
             newSupplierBox.appendChild(newHeading);
             newSupplierBox.appendChild(newParagraph);
             grid.appendChild(newSupplierBox)
@@ -233,10 +243,10 @@
     }
 
     function displaySupplyChains(suppliers, connections, supplychains, map) {
-        supplychains[0].connections = [1, 2, 5];
-        supplychains[1].connections = [5, 4];
-        supplychains[2].connections = [6, 7];
-        supplychains[3].connections = [4, 7];
+        supplychains[0].connections = [1, 2, 6];
+        supplychains[1].connections = [1, 6];
+        supplychains[2].connections = [5, 6];
+        supplychains[3].connections = [7, 8];
 
         var i;
         var newList = document.getElementById("list");
@@ -342,8 +352,13 @@
 
         return poly;
     }
-
-    // }
+    function img_create(src, alt, title) {
+        var img = IEWIN ? new Image() : document.createElement('img');
+        img.src = src;
+        if ( alt != null ) img.alt = alt;
+        if ( title != null ) img.title = title;
+        return img;
+    }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgXduZYCxQxxBXDQ5S87uUWL4OIMaNA9I&callback=initMap&libraries=geometry">
