@@ -90,7 +90,7 @@ function getData(map) {
                 }
             }
         }
-    xhttp.open("GET", "http://localhost:3000/all_data", true);
+    xhttp.open("GET", "https://6139e461.ngrok.io/all_data", true);
     xhttp.send();
 
 }
