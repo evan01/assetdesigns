@@ -24,8 +24,8 @@
     <div class="col-md-6">
       <div class="list-group">
         <%= Supplier.find_each do |s| %>
-        <div class="media list-group-item list-group-item-action flex-column align-items-start">
-          <div class="media-left">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+
             <% if s.image.file? %>
               <%= image_tag s.image.url, class: "img-responsive", :size => "180x124", :crop => :fill%>
             <% end %>
@@ -35,13 +35,7 @@
             <%= link_to edit_supplier_path(s), class: "btn btn-primary btn-sm" do %>
               <span> Edit Supplier </span>
             <% end %>
-          </div>
         </div>
-        <a href="#" class="list-group-item active">
-          <!-- <%= image_tag s.image.url, class: "img-thumbnail" %> -->
-          <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-          <p class="list-group-item-text">List Group Item Text</p>
-        </a>
         <% end %>
       </div>
 
