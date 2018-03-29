@@ -1,6 +1,5 @@
 {% if section.settings.image != blank and section.settings.text != "" %}
 
-
 <div class="wrapper row">
   <div class="page-width feature-row">
     {% capture image_layout %}
@@ -50,12 +49,11 @@
     </div>
   </div>
 </div>
-
 {%endif%}
 
 {% schema %}
   {
-    "name": "Our Story - Section 2",
+    "name": "Our Story - Section 4",
 	"settings": [
       {
         "type": "image_picker",
@@ -97,14 +95,12 @@
       {
         "type": "text",
         "id": "title",
-        "label": "Heading",
-        "default": "Image with text"
+        "label": "Heading"
       },
       {
         "type": "richtext",
         "id": "text",
-        "label": "Text",
-        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+        "label": "Text"
       }
     ],
     "presets": [
