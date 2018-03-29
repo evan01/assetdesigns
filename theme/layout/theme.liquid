@@ -113,11 +113,11 @@
     {% endif %}
 
     <main class="main-content" role="main">
-      {% unless template.name == "index" or template == "collection.image" %}
+      {% unless template.name == "index" or template == "collection.image" or template == "page.supplymap"%}
         <div class="wrapper">
       {% endunless %}
         {{ content_for_layout }}
-      {% unless template.name == "index" or template == "collection.image" %}
+      {% unless template.name == "index" or template == "collection.image" or template == "page.supplymap"%}
         </div>
       {% endunless %}
     </main>
