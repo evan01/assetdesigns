@@ -39,7 +39,7 @@
         <%= SupplyChain.find_each do |s| %>
         <div class="media list-group-item list-group-item-action flex-column align-items-start">
           <h4 class="list-group-item-heading"><%= s.name %> </h4>
-          <h4 class="list-group-item-heading">From  <%= s.getOriginSupplier %>: to <%= s.getFinalSupplier %></h4>
+          <h4 class="list-group-item-heading">From  <%= s.getFirstSupplier %>: to <%= s.getLastSupplier %></h4>
           <p class="list-group-item-text">Total CO2 Emission: <%=  s.getTotalCO2Emissions %></p>
           <p class="list-group-item-text">Total Distance: <%=  s.getTotalDistance %></p>
 					<%= link_to supply_chain_path(s), class: "btn btn-primary btn-sm" do %>

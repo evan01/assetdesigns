@@ -63,7 +63,7 @@ class SupplyChain < ActiveRecord::Base
 		end
 		
 		# Return last connection
-		first_correction
+		first_connection
 	end
 
 	# Method to get the last point of the supply chain
@@ -97,6 +97,6 @@ class SupplyChain < ActiveRecord::Base
 		end
 
 		# Return last connection
-		last_correction
+		last_connection
 	end
 end
