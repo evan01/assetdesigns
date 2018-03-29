@@ -34,9 +34,11 @@
     border: 1px solid #ccc;
   }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../theme/assets/bootstrap.min.css" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="bootstrap">
   <div style="padding-top: 20px"></div>
   <div class="container-fluid">
     <div class="row">
@@ -64,7 +66,7 @@
         </div>
       </div>
     </div>
-
+</div>
 
 
     <script>
@@ -157,7 +159,7 @@
         }
       }
     }
-    xhttp.open("GET", "https://0985a10e.ngrok.io/all_data", true);
+    xhttp.open("GET", "http://localhost:3000/all_data", true);
     xhttp.send();
 
   }
