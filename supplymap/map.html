@@ -24,14 +24,31 @@
 
   }
   #grid_suppliers h5{
-    text-align: center;
+    padding-top: 2%;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  #grid_suppliers p{
+  	margin-bottom: 0;
+  }
+  
+  #grid_suppliers .suppliers-image{
+  	width: 100%;
+  }
+  
+  #grid_suppliers .suppliers-details{
+  	color: #387aaf;
+  	padding: 5%;
   }
 
   #grid_suppliers .col-3{
     width: 100%;
     margin: 3%;
-    padding: 1%;
-    border: 1px solid #ccc;
+    padding-right: 0;
+    padding-left: 0;
+    border: 1px solid #387aaf;
+    text-align: center;
   }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -204,13 +221,20 @@
     for(i = 0; i < suppliers.length; i++){
       var newSupplierBox = document.createElement('div');
       newSupplierBox.className = 'col-3';
+      var newImage = document.createElement('img');
+      newImage.className = 'suppliers-image';
+      newImage.src = suppliers[i].image_url;
+      var newDetails = document.createElement('div');
+      newDetails.className = 'suppliers-details';
       var newHeading = document.createElement('h5');
       newHeading.innerHTML = suppliers[i].name;
       var newParagraph = document.createElement('p');
       newParagraph.innerHTML = suppliers[i].description;
-      newSupplierBox.appendChild(newHeading);
-      newSupplierBox.appendChild(newParagraph);
-      grid.appendChild(newSupplierBox)
+      newSupplierBox.appendChild(newImage);
+      newDetails.appendChild(newHeading);
+      newDetails.appendChild(newParagraph);
+      newSupplierBox.appendChild(newDetails);
+      grid.appendChild(newSupplierBox);
     }
   }
 
