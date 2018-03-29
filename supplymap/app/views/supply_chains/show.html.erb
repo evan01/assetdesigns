@@ -19,6 +19,22 @@ table, th, td {
   </tr>
 </table>
 
+<table>
+  <tr>
+    <th>Id</th>
+    <th><%= @suppliers.id %></th>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th><%= @suppliers.name %></th>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <th><%= @suppliers.description %></th>
+  </tr>
+</table>
+
+
 <p>
 <div class="btn-group">
   <%= link_to edit_supply_chain_path(@supplychain), class: "btn btn-primary btn-sm" do %>

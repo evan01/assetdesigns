@@ -13,6 +13,7 @@ class SupplyChainsController < ApplicationController
     # Show supplier
     def show
         @supplychain = SupplyChain.find(params[:id])
+				@suppliers = Supplier.find_by supply_chain_id: params[:id]
     end
 
     # New supplier and create
@@ -34,6 +35,7 @@ class SupplyChainsController < ApplicationController
     # Edit and update supplier
     def edit
         @supplychain = SupplyChain.find(params[:id])
+				@suppliers = Supplier.where(supply_chain_id: params[:id])
     end
 
     def update
