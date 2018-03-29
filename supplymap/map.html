@@ -50,6 +50,19 @@
     border: 1px solid #387aaf;
     text-align: center;
   }
+  
+  #content .row {
+  	padding: 1% 8%;
+  }
+  
+  .supplier-images--info > img {
+  	width: 100%;
+  	margin: 0;
+  }
+  
+  .supplier-details--info p {
+  	font-size: 20px;
+  }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -62,6 +75,7 @@
           <h3>Products</h5>
             <ol id="demo"></ol>
             <div class="list-group" id="list"></div>
+            <hr width="80%">
           </div>
           <div id="map"></div> 
         </div>
@@ -194,11 +208,15 @@
         return function() {
           var contentString = '<div id="content">'+
           '<div id="siteNotice">'+
-          '</div>'+
+          '</div>'+ '<div class="row">'+
+          '<div class="supplier-details--info col-6">'+
           '<h1 id="firstHeading" class="firstHeading">'+suppliers[i].name+'</h1>'+
           '<div id="bodyContent">'+
           '<p>'+suppliers[i].description+
-          '</p>'+
+          '</p>'+'</div>'+
+          '</div>'+ '<div class="supplier-images--info col-6">'+
+          '<img src="'+suppliers[i].image_url+'">'+
+          '</div>'+
           '</div>'+
           '</div>';
           infowindow.setContent(contentString);
