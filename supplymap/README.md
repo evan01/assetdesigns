@@ -158,3 +158,18 @@ request the page at localhost:3000/all_suppliers will return the JSON formatted 
 # Readme Todo
 * How to run the test suite
 * Deployment instructions
+
+# Rails Command Line
+## Rails Application Commands
+    rails c //runs the rails console
+    rails s //starts the rails application
+    rails dbconsole //look at the psql database
+
+## Rails Generator
+When you want to create a file in the project in the right place and have everything referenced perfectly
+
+    rails generate assets
+    rails generate channel
+    rails generate controller
+    
+

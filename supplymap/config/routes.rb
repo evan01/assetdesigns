@@ -30,4 +30,7 @@ Rails.application.routes.draw do
 
   get 'supplier_connections/' => 'supplier_connections#index'
   resources :supplier_connections
+
+
+  get 'map' => 'map#supply_map'
 end

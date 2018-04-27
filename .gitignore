@@ -1,4 +1,4 @@
-.DS_Store
+*.DS_Store
 theme/config.yml
 .idea/
 *.DS_Store
@@ -9,3 +9,7 @@ supplymap/app.yaml
 supplymap/public/*
 supplymap/config/database.yml
 supplymap/config/initializers/shopify_app.rb
+supplymap/config/client-cert.pem
+supplymap/config/client-key.pem
+supplymap/config/server-ca.pem
+.DS_Store

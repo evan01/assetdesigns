@@ -1,0 +1,208 @@
+<div class="wrapper row">
+  <div class="page-width feature-row">
+    <div class="feature-row__item grid-press__item">
+      {% if section.settings.image_1 != blank %}
+      <noscript>
+        {{ section.settings.image_1 | img_url: '600x600' | img_tag: section.settings.image.alt, 'feature-row__image-no-js' }}
+      </noscript>
+      <div class="feature-row__image-wrapper" style="padding-top:75%;">
+        {% assign img_url = section.settings.image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img class="feature-row__image lazyload"
+             src="{{ section.settings.image_1 | img_url: '300x300' }}"
+             data-src="{{ img_url }}"
+             data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+             data-aspectratio="{{ section.settings.image_1.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ section.settings.image_1.alt | escape }}">
+      </div>
+      {% else %}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      <div class="feature-row__text">
+        {% if section.settings.press_link_1 != blank and section.settings.press_label_1 != blank %}
+        <a href= "{{section.settings.press_link_1}}"> 
+          {{section.settings.press_label_1 | escape}}
+        </a>
+        {% endif %}
+        {% if section.settings.press_label_desc_1 != blank %}
+        <span> 
+          {{section.settings.press_label_desc_1}}
+        </span>
+        {% endif %}        
+      </div>
+    </div>
+    <div class="feature-row__item grid-press__item">
+      {% if section.settings.image_2 != blank %}
+      <noscript>
+        {{ section.settings.image_2 | img_url: '600x600' | img_tag: section.settings.image_2.alt, 'feature-row__image-no-js' }}
+      </noscript>
+      <div class="feature-row__image-wrapper" style="padding-top:75%;">
+        {% assign img_url = section.settings.image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img class="feature-row__image lazyload"
+             src="{{ section.settings.image_2 | img_url: '300x300' }}"
+             data-src="{{ img_url }}"
+             data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+             data-aspectratio="{{ section.settings.image_2.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ section.settings.image_2.alt | escape }}">
+      </div>
+      {% else %}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      <div class="feature-row__text">
+        {% if section.settings.press_link_2 != blank and section.settings.press_label_2 != blank %}
+        <a href= "{{section.settings.press_link_2}}"> 
+          {{section.settings.press_label_2 | escape}}
+        </a>
+        {% endif %}
+        {% if section.settings.press_label_desc_2 != blank %}
+        <span> {{section.settings.press_label_desc_2}}</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="feature-row__item grid-press__item">
+      {% if section.settings.image_3 != blank %}
+      <noscript>
+        {{ section.settings.image_3 | img_url: '600x600' | img_tag: section.settings.image_3.alt, 'feature-row__image-no-js' }}
+      </noscript>
+      <div class="feature-row__image-wrapper" style="padding-top:75%;">
+        {% assign img_url = section.settings.image_3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img class="feature-row__image lazyload"
+             src="{{ section.settings.image_3 | img_url: '300x300' }}"
+             data-src="{{ img_url }}"
+             data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+             data-aspectratio="{{ section.settings.image_3.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ section.settings.image_3.alt | escape }}">
+      </div>
+      {% else %}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      <div class="feature-row__text">
+        {% if section.settings.press_link_3 != blank and section.settings.press_label_3 != blank %}
+        <a href= "{{section.settings.press_link_3}}"> 
+          {{section.settings.press_label_3 | escape}}
+        </a>
+        {% endif %}
+        {% if section.settings.press_label_desc_3!= blank %}
+        <span> {{section.settings.press_label_desc_3}} </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div> 
+  
+
+{% schema %}
+  {
+    "name": "Press Section Grid 3",
+    	"settings": [
+        {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+        },
+        {
+            "type": "url",
+            "id": "press_link_1",
+            "label": "Press link"
+        },
+        {
+            "type": "text",
+            "id": "press_label_1",
+            "label": "Press label"
+        },
+        {
+            "type": "text",
+            "id": "press_label_desc_1",
+            "label": "Press description"
+        },
+		{
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+        },
+        {
+            "type": "url",
+            "id": "press_link_2",
+            "label": "Press link"
+        },
+        {
+            "type": "text",
+            "id": "press_label_2",
+            "label": "Press label"
+        },
+        {
+            "type": "text",
+            "id": "press_label_desc_2",
+            "label": "Press description"
+        },
+		{
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+        },
+        {
+            "type": "url",
+            "id": "press_link_3",
+            "label": "Press link"
+        },
+        {
+            "type": "text",
+            "id": "press_label_3",
+            "label": "Press label"
+        },
+        {
+            "type": "text",
+            "id": "press_label_desc_3",
+            "label": "Press description"
+        }
+		
+	  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+.row {
+	margin-bottom: 20px;
+	height: 400px;
+}
+
+.row .feature-row {
+	align-items: flex-start;
+}
+
+.row .grid-press__item {
+	margin: 0 20px;
+}
+
+.row .feature-row__text {
+	text-align: center;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.row .feature-row__image-wrapper > img {
+	height: 200px;
+	width: auto;
+}
+
+.row .feature-row__text > a {
+	text-decoration: underline;
+	font-size: 14px;
+}
+
+.row .feature-row__text > span {
+	display: block;
+	font-size: 11px;
+	margin-top: 10px;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
