@@ -13,3 +13,4 @@ supplymap/config/client-cert.pem
 supplymap/config/client-key.pem
 supplymap/config/server-ca.pem
 .DS_Store
+*.yml
