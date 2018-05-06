@@ -1,0 +1,53 @@
+<!-- /templates/page.factories.liquid -->
+ <style>
+        #map {
+            height: 700px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #floating-panel {
+            background: #fff;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+            display: none;
+            margin-top: 1%;
+            margin-left: 1%;
+            margin-bottom: 1%;
+            height: 85%;
+            overflow-y: scroll;
+            max-width: 20%;
+
+        }
+
+        #grid_suppliers h5 {
+            text-align: center;
+        }
+
+        #grid_suppliers .col-3 {
+            width: 100%;
+            margin: 3%;
+            padding: 1%;
+            border: 1px solid #ccc;
+        }
+
+        .full-width {
+            max-width: 100%;
+            margin: auto;
+        }
+
+        #supplier{
+            text-align: center;
+        }
+
+        #info{
+            text-align: justify;
+        }
+    </style>
+<div>
+    <div id="map_container">map</div>
+</div>
+{{ 'bootstrap.min.css' | asset_url | | stylesheet_tag }}
+{{ 'map.js' | | asset_url || | script_tag }}
