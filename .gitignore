@@ -12,5 +12,11 @@ supplymap/config/initializers/shopify_app.rb
 supplymap/config/client-cert.pem
 supplymap/config/client-key.pem
 supplymap/config/server-ca.pem
+map_production/config/*
+map_production/public/*
 .DS_Store
 *.yml
+*.yaml
+*.pem
+ngrok
+

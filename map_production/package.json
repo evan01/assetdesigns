@@ -3,7 +3,9 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "@shopify/polaris": "^2.0.0",
     "babel-preset-react": "^6.24.1",
+    "polaris": "^1.2.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"

@@ -1,4 +1,7 @@
 Rails.application.configure do
+
+  config.google_cloud.project_id = "assetdesigns-prod"
+
   # Verifies that versions and hashed value of the package contents in the project's package.json
 config.webpacker.check_yarn_integrity = false
 
