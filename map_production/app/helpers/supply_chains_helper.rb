@@ -1,0 +1,2 @@
+module SupplyChainsHelper
+end

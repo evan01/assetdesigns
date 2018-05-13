@@ -1,0 +1,17 @@
+<%= form_with(model: supply_chain, local: true) do |form| %>
+  <% if supply_chain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supply_chain.errors.count, "error") %> prohibited this supply_chain from being saved:</h2>
+
+      <ul>
+      <% supply_chain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

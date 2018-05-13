@@ -1,0 +1,27 @@
+<%= form_with(model: supply_map, local: true) do |form| %>
+  <% if supply_map.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supply_map.errors.count, "error") %> prohibited this supply_map from being saved:</h2>
+
+      <ul>
+      <% supply_map.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :supply_map_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id %>
+    <%= form.number_field :id, id: :supply_map_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

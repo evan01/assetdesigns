@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508162235) do
+ActiveRecord::Schema.define(version: 20180511194325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "connections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_in_chain"
+    t.integer "supplier_connected_to"
+    t.integer "supply_chain_id"
+    t.integer "co2_emission"
+    t.string "transportation"
+  end
 
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
@@ -21,6 +31,22 @@ ActiveRecord::Schema.define(version: 20180508162235) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_url"
+    t.string "description"
+  end
+
+  create_table "supply_chains", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "supply_chain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

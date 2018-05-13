@@ -1,0 +1,2 @@
+class SupplyMap < ApplicationRecord
+end

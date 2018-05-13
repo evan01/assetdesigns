@@ -1,14 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import {
-    Page,
-    Card,
-    Button,
-    Thumbnail,
-    AppProvider,
-    Tabs
-} from "@shopify/polaris";
+import { Page, Card, Button, Tabs, AppProvider } from "@shopify/polaris";
+import Suppliers from "./Suppliers";
+import SupplyChains from "./SupplyChains";
 
 class App extends React.Component {
     state = {
@@ -28,17 +23,29 @@ class App extends React.Component {
     };
 
     handleTabChange = tabIndex => {
-      //First set the tab state to be selected
-      this.setState({selected: tabIndex})
+        //First set the tab state to be selected
+        this.setState({ selected: tabIndex });
+    };
+
+    renderSuppliers = () => {
+        //First get the suppliers from API
+        const suppliers = this.props.suppliers;
+        return (<Suppliers suppliersList={suppliers} />);
+        //Then render a suppliers view with the data
+    };
+
+    renderSupplyChains = () => {
+        //First get the supply chains from the API
+        const supplyChains = this.props.supplyChains;
+        //Then render a supply chains view with the data
+    return (<SupplyChains />);
     };
 
     render() {
-        // const shopOrigin = document.querySelector("#ShopOrigin").textContent;
-        // const apiKey = document.querySelector("#APIKey").textContent;
-        const apiKey = this.props.shop_session.token
-        const origin = "https://" + this.props.shop_session.url
+        const apiKey = this.props.shop_session.token;
+        const origin = "https://" + this.props.shop_session.url;
         return (
-          <AppProvider shopOrigin={origin} apiKey={apiKey}>
+            <AppProvider shopOrigin={origin} apiKey={apiKey}>
                 <Page title="Home" separator>
                     <Card>
                         <Tabs
@@ -46,7 +53,10 @@ class App extends React.Component {
                             selected={this.state.selected}
                             onSelect={this.handleTabChange}
                         />
-                        <Card.Section title={this.state.currentTab}>
+                        <Card.Section>
+                            {(this.state.selected === 0)
+                                ? this.renderSuppliers()
+                                : this.renderSupplyChains()}
                             <p>Tab {this.state.selected} selected</p>
                         </Card.Section>
                     </Card>
@@ -58,7 +68,7 @@ class App extends React.Component {
 
 // Render component with data
 document.addEventListener("DOMContentLoaded", () => {
-  const node = document.getElementById("App_Container");
+    const node = document.getElementById("App_Container");
     const data = JSON.parse(node.getAttribute("data"));
     ReactDOM.render(<App {...data} />, node);
 });
